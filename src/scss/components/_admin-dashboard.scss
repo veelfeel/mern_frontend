@@ -1,0 +1,40 @@
+.admin-dashboard {
+  padding-top: 120px;
+  padding-bottom: 50px;
+
+  & h2 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  &__content {
+    display: flex;
+  }
+
+  &__sidebar {
+    min-width: 160px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(41, 52, 120, 0.53);
+    padding: 10px;
+  }
+
+  &__link {
+    padding: 12px;
+    transition: $transition;
+    color: white;
+    border-left: 0px solid #9b0097;
+
+    &--active {
+      padding: 12px;
+      transition: $transition;
+      border-left: 4px solid #9b0097;
+    }
+  }
+
+  &__outlet {
+    padding: 10px;
+    background-color: white;
+    width: calc(100% - 160px);
+  }
+}

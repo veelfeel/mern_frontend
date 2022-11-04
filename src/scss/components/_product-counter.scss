@@ -1,0 +1,54 @@
+.product-counter {
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-self: flex-end;
+  font-size: 18px;
+  height: 25px;
+  overflow: hidden;
+
+  @media (max-width: 375px) {
+    order: 2;
+    margin-right: 0;
+  }
+
+  .product-counter__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 100%;
+    border-radius: 8px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    text-align: center;
+    user-select: none;
+    background-color: #ffbf4b4a;
+
+    &:hover {
+      background-color: #ffbf4b7d;
+
+      @media (max-width: 375px) {
+        background-color: #efefef;
+        color: black;
+      }
+    }
+
+    &:disabled {
+      background-color: #e3e3e3;
+      cursor: default;
+    }
+  }
+
+  &__quantity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22px;
+    height: 100%;
+    font-size: 0.9rem;
+    line-height: 1;
+    cursor: default;
+  }
+}

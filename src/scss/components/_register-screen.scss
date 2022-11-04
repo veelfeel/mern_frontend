@@ -1,0 +1,31 @@
+.register-screen {
+  padding-top: 160px;
+  padding-bottom: 50px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form__items-register {
+  height: 540px;
+  grid-template-rows: auto 0.9fr 0.9fr 0.9fr 0.9fr auto auto;
+
+  & li {
+    &:first-child {
+      align-self: flex-start;
+    }
+
+    &:last-child {
+      flex-direction: column;
+
+      & p {
+        margin-right: 0;
+      }
+
+      & a {
+        padding-top: 10px;
+      }
+    }
+  }
+}
