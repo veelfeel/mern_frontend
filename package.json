@@ -1,8 +1,8 @@
 {
-  "name": "frontend",
+  "name": "mern",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.tsx",
   "scripts": {
     "start": "webpack serve",
     "build-dev": "webpack",
@@ -10,7 +10,7 @@
     "clear": "rd /s /q dist"
   },
   "keywords": [],
-  "author": "",
+  "author": "veelfeel",
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
