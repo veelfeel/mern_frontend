@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { addCartItem, minusCartItem, removeCartItem } from '../redux/cart/slice';
 import { CartItem as CartItemType } from '../redux/cart/types';
 import { useAppDispatch } from '../redux/store';
@@ -35,9 +36,9 @@ export const CartItem: React.FC<CartItemProps> = ({ _id, name, price, count, ima
   return (
     <div className="cart-item">
       <img className="cart-item__img" src={imageUrl} alt={name} />
-      <a href="">
+      <Link to={`/product/${_id}`}>
         <div className="cart-item__title">{name}</div>
-      </a>
+      </Link>
       <div className="cart-item__price">{price.toLocaleString()} ₽</div>
       <div className="product-counter">
         <button disabled={count === 1} className="product-counter__button" onClick={onClickMinus}>

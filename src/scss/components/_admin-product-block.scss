@@ -1,0 +1,25 @@
+.admin-product-block {
+  &__img {
+    width: 100px;
+    height: 50px;
+    object-fit: cover;
+  }
+
+  &__title {
+    font-weight: 500;
+    font-size: 15px;
+    text-align: left;
+  }
+
+  &__price {
+    font-size: 18px;
+    text-align: left;
+  }
+
+  &__button-delete {
+    font-size: 13px;
+    font-weight: 500;
+    background: none;
+    color: #999;
+  }
+}

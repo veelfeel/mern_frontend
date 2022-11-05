@@ -9,6 +9,7 @@
   &__add-product {
     padding: 14px;
     border-radius: 10px;
+    font-size: 14px;
     font-weight: 500;
     background-color: rgba(41, 52, 120, 0.53);
     color: white;
@@ -27,8 +28,45 @@
   }
 
   & input {
+    margin-bottom: 26px;
     padding: 10px;
     border-radius: 6px;
     border: 1px solid #fff479;
+  }
+
+  & table {
+    width: 100%;
+    border: 1px solid #e7e7e7;
+    border-collapse: collapse;
+    table-layout: fixed;
+
+    & thead {
+      & th {
+        border: 1px solid #e7e7e7;
+        padding: 12px;
+        font-weight: 500;
+        background-color: #ffffad;
+      }
+    }
+
+    & tbody {
+      & tr {
+        border: 1px solid #e7e7e7;
+
+        &:nth-child(odd) {
+          background: #fff;
+        }
+
+        &:nth-child(even) {
+          background: #f7f7f7;
+        }
+      }
+
+      & td {
+        padding: 30px;
+        border: 1px solid #e7e7e7;
+        text-align: center;
+      }
+    }
   }
 }
