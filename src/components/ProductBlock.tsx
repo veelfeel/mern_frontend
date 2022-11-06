@@ -9,7 +9,7 @@ import { addCartItem } from '../redux/cart/slice';
 
 export type ProductBlockProps = {
   _id: string;
-  name: string;
+  title: string;
   imageUrl: string;
   price: number;
   countInStock: number;
@@ -24,7 +24,7 @@ export type ProductBlockProps = {
 
 export const ProductBlock: React.FC<ProductBlockProps> = ({
   _id,
-  name,
+  title,
   imageUrl,
   price,
   countInStock,
@@ -41,7 +41,7 @@ export const ProductBlock: React.FC<ProductBlockProps> = ({
   const onClickAdd = () => {
     const item: CartItem = {
       _id,
-      name,
+      title,
       price,
       count: 0,
       imageUrl,
@@ -52,10 +52,10 @@ export const ProductBlock: React.FC<ProductBlockProps> = ({
   return (
     <div className="product-block">
       <div className="product-block__inner-img">
-        <img className="product-block__img" src={imageUrl} alt={name} />
+        <img className="product-block__img" src={imageUrl} alt={title} />
       </div>
       <Link to={'/product/' + _id}>
-        <h4 className="product-block__title text-primary">{name.replace('комплект', '')}</h4>
+        <h4 className="product-block__title text-primary">{title}</h4>
       </Link>
       <CardRating />
       <div className="product-block__info-details">

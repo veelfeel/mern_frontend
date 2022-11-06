@@ -16,12 +16,12 @@ export const Footer: React.FC = () => {
               <ul className="social">
                 <li className="social-item">
                   <a className="social-link social-tg" href="" target="_blank">
-                    <img src="images/telegram.svg" alt="telegram" />
+                    <img src="../images/telegram.svg" alt="telegram" />
                   </a>
                 </li>
                 <li className="social-item">
                   <a className="social-link social-wa" href="" target="_blank">
-                    <img src="images/whatsapp.svg" alt="whatsapp" />
+                    <img src="../images/whatsapp.svg" alt="whatsapp" />
                   </a>
                 </li>
               </ul>

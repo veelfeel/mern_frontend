@@ -8,7 +8,6 @@ import { useAppDispatch, useAppSelector } from '../redux/store';
 const Dashboard = () => {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(selectIsAuth);
-  const name = useAppSelector((state) => state.auth.data?.fullName);
 
   const onClickLogout = () => {
     dispatch(logout());
@@ -20,8 +19,6 @@ const Dashboard = () => {
 
   return (
     <div className="admin-dashboard">
-      {/* <div className="container"> */}
-      {/* <h2>{`Здравствуйте, ${name}. Вы находитесь в панели администратора`}</h2> */}
       <div className="admin-dashboard__content">
         <div className="admin-dashboard__sidebar">
           <NavLink
@@ -59,7 +56,6 @@ const Dashboard = () => {
         </svg>
         <span>Выход</span>
       </button>
-      {/* </div> */}
     </div>
   );
 };

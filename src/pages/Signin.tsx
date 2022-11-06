@@ -12,6 +12,7 @@ import { Auth } from '../redux/auth/types';
 const Signin: React.FC = () => {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(selectIsAuth);
+  const isAdmin = useAppSelector((state) => state.auth.data?.isAdmin);
 
   const {
     register,
@@ -29,9 +30,13 @@ const Signin: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  if (isAuth) {
-    return <Navigate to="/" />;
+  if (isAuth && isAdmin) {
+    return <Navigate to="/admin" />;
   }
+
+  // if (isAuth) {
+  //   return <Navigate to="/" />;
+  // }
 
   return (
     <div className="signin-screen">

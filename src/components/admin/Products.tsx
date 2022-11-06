@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom';
 
 import { selectProducts } from '../../redux/product/selectors';
 import { Product } from '../../redux/product/types';
-import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { useAppSelector } from '../../redux/store';
 
 import { Loader } from '../Loader';
 import { ProductBlock } from './ProductBlock';
 
 const Products: React.FC = () => {
-  const dispatch = useAppDispatch();
   const { products, status } = useAppSelector(selectProducts);
 
   const productBlocks = products.map((obj: Product) => <ProductBlock key={obj._id} {...obj} />);
@@ -18,7 +17,7 @@ const Products: React.FC = () => {
     <div className="admin-products">
       <div className="admin-products__header">
         <h3>Товары</h3>
-        <Link to="/admin/products/add-product" className="admin-products__add-product">
+        <Link to="/admin/products/add-product" className="admin-button">
           <span>+</span>
           <div>Добавить товар</div>
         </Link>

@@ -63,7 +63,7 @@ export const Header: React.FC = () => {
             </div>
             <div className="header-info-mobile">
               <a href="tel:+79881482838">
-                <img src="images/icons/phone.svg" alt="phone" />
+                <img src="../images/icons/phone.svg" alt="phone" />
               </a>
             </div>
           </div>

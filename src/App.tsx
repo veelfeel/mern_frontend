@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import Loadable from 'react-loadable';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from './redux/store';
 import { selectIsAuth } from './redux/auth/selectors';
@@ -17,6 +17,7 @@ import Dashboard from './pages/Dashboard';
 import Products from './components/admin/Products';
 import AddProduct from './components/admin/AddProduct';
 import Users from './components/admin/Users';
+import { fetchProducts } from './redux/product/slice';
 
 // const Favourites = Loadable({
 //   loader: () => import(/* webpackChunkName: 'Favourites' */ './pages/Favourites'),
@@ -37,6 +38,7 @@ function App() {
 
   React.useEffect(() => {
     dispatch(fetchAuthMe());
+    dispatch(fetchProducts());
   }, [dispatch]);
 
   return (
@@ -71,9 +73,8 @@ function App() {
         <Route path="signin" element={<Signin />} />
         <Route path="profile" element={<Profile />} />
         <Route path="admin" element={<Dashboard />}>
-          <Route path="products" element={<Products />}>
-            <Route path="add-product" element={<AddProduct />} />
-          </Route>
+          <Route path="products" element={<Products />} />
+          <Route path="products/add-product" element={<AddProduct />} />
           <Route path="users" element={<Users />} />
         </Route>
         <Route

@@ -6,27 +6,6 @@
     justify-content: space-between;
   }
 
-  &__add-product {
-    padding: 14px;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 500;
-    background-color: rgba(41, 52, 120, 0.53);
-    color: white;
-    display: inline-flex;
-    align-items: center;
-    transition: $transition;
-
-    &:hover {
-      background-color: rgb(41 52 120 / 58%);
-      transition: $transition;
-    }
-
-    & span {
-      padding-right: 6px;
-    }
-  }
-
   & input {
     margin-bottom: 26px;
     padding: 10px;

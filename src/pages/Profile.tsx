@@ -12,9 +12,9 @@ const Profile: React.FC = () => {
     dispatch(logout());
   };
 
-  if (!isAuth) {
-    return <Navigate to="/" />;
-  }
+  // if (!isAuth) {
+  //   return <Navigate to="/" />;
+  // }
 
   return (
     <div className="profile-screen">

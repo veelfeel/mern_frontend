@@ -17,12 +17,7 @@ import {
 import { Product } from '../redux/product/types';
 
 const Home: React.FC = () => {
-  const dispatch = useAppDispatch();
   const { products, status } = useAppSelector(selectProducts);
-
-  React.useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
 
   const productBlocks = products.map((obj: Product) => <ProductBlock key={obj._id} {...obj} />);
 

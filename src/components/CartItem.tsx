@@ -6,13 +6,13 @@ import { useAppDispatch } from '../redux/store';
 
 type CartItemProps = {
   _id: string;
-  name: string;
+  title: string;
   price: number;
   count: number;
   imageUrl: string;
 };
 
-export const CartItem: React.FC<CartItemProps> = ({ _id, name, price, count, imageUrl }) => {
+export const CartItem: React.FC<CartItemProps> = ({ _id, title, price, count, imageUrl }) => {
   const dispatch = useAppDispatch();
 
   const onClickPlus = () => {
@@ -35,9 +35,9 @@ export const CartItem: React.FC<CartItemProps> = ({ _id, name, price, count, ima
 
   return (
     <div className="cart-item">
-      <img className="cart-item__img" src={imageUrl} alt={name} />
+      <img className="cart-item__img" src={imageUrl} alt={title} />
       <Link to={`/product/${_id}`}>
-        <div className="cart-item__title">{name}</div>
+        <div className="cart-item__title">{title}</div>
       </Link>
       <div className="cart-item__price">{price.toLocaleString()} ₽</div>
       <div className="product-counter">

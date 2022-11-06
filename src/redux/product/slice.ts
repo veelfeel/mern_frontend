@@ -5,9 +5,22 @@ import { Product, ProductSliceState, Status } from './types';
 import axios from '../../axios';
 
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
-  const { data } = await axios.get(`/api/products`);
+  const { data } = await axios.get('/api/products');
   return data;
 });
+
+export const fetchRemoveProduct = createAsyncThunk<object, string, { rejectValue: string }>(
+  'products/fetchRemoveProduct',
+  async (id, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.delete(`/api/products/${id}`);
+      return data as object;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue('Не удалось удалить продукт');
+    }
+  },
+);
 
 const initialState: ProductSliceState = {
   products: [],
@@ -17,11 +30,7 @@ const initialState: ProductSliceState = {
 const productsSlice = createSlice({
   name: 'products',
   initialState,
-  reducers: {
-    setProducts(state, action: PayloadAction<Product[]>) {
-      state.products = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {
       state.status = Status.LOADING;
@@ -34,6 +43,10 @@ const productsSlice = createSlice({
     builder.addCase(fetchProducts.rejected, (state) => {
       state.status = Status.ERROR;
       state.products = [];
+    });
+
+    builder.addCase(fetchRemoveProduct.pending, (state, action) => {
+      state.products = state.products.filter((x) => x._id !== action.meta.arg);
     });
   },
 });

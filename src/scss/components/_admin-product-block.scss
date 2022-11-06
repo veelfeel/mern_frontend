@@ -1,4 +1,8 @@
 .admin-product-block {
+  &__id {
+    text-align: left;
+  }
+
   &__img {
     width: 100px;
     height: 50px;
