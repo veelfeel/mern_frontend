@@ -19,7 +19,6 @@ export const ProductList: React.FC = () => {
   if (status === 'error') {
     return <ErrorLoading />;
   }
-
   return (
     <table>
       <thead>

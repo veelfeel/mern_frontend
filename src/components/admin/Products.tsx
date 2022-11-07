@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Pagination } from '../Pagination';
 
 import { ProductList } from './ProductList';
 import { Search } from './Search';
@@ -16,6 +17,7 @@ const Products: React.FC = () => {
       </div>
       <Search />
       <ProductList />
+      <Pagination />
     </div>
   );
 };

@@ -1,37 +1,10 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { FilterProductParams, Product, ProductSliceState, Status } from './types';
-
-import axios from '../../axios';
-
-export const fetchProducts = createAsyncThunk<
-  Product[],
-  FilterProductParams,
-  { rejectValue: string }
->('products/fetchProducts', async (params, { rejectWithValue }) => {
-  try {
-    const { search } = params;
-    const { data } = await axios.get(`/api/products?${search}`);
-    return data as Product[];
-  } catch (error) {
-    console.log(error);
-    return rejectWithValue('Не удалось получить продукты');
-  }
-});
-
-export const fetchRemoveProduct = createAsyncThunk<object, string, { rejectValue: string }>(
-  'products/fetchRemoveProduct',
-  async (id, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.delete(`/api/products/${id}`);
-      return data as object;
-    } catch (error) {
-      console.log(error);
-      return rejectWithValue('Не удалось удалить продукт');
-    }
-  },
-);
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchProducts, fetchRemoveProduct } from './asyncThunk';
+import { ProductSliceState, Status } from './types';
 
 const initialState: ProductSliceState = {
+  total: 0,
+  limit: 0,
   products: [],
   status: Status.LOADING,
 };
@@ -43,14 +16,20 @@ const productsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {
       state.status = Status.LOADING;
+      state.total = 0;
+      state.limit = 0;
       state.products = [];
     });
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       state.status = Status.SUCCESS;
-      state.products = action.payload;
+      state.total = action.payload.total;
+      state.limit = action.payload.limit;
+      state.products = action.payload.products;
     });
     builder.addCase(fetchProducts.rejected, (state) => {
       state.status = Status.ERROR;
+      state.total = 0;
+      state.limit = 0;
       state.products = [];
     });
 

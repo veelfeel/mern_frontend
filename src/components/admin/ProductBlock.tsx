@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAppDispatch } from '../../redux/store';
-import { fetchRemoveProduct } from '../../redux/product/slice';
+import { fetchRemoveProduct } from '../../redux/product/asyncThunk';
 import { Product } from '../../redux/product/types';
 
 export const ProductBlock: React.FC<Product> = ({ _id, title, price, imageUrl }) => {

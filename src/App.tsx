@@ -5,6 +5,8 @@ import { Routes, Route } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from './redux/store';
 import { selectIsAuth } from './redux/auth/selectors';
 import { fetchAuthMe } from './redux/auth/asyncThunk';
+import { selectFilters } from './redux/filters/selectors';
+import { fetchProducts } from './redux/product/asyncThunk';
 
 import './app.scss';
 
@@ -17,8 +19,6 @@ import Dashboard from './pages/Dashboard';
 import Products from './components/admin/Products';
 import AddProduct from './components/admin/AddProduct';
 import Users from './components/admin/Users';
-import { fetchProducts } from './redux/product/slice';
-import { selectFilters } from './redux/filters/selectors';
 
 // const Favourites = Loadable({
 //   loader: () => import(/* webpackChunkName: 'Favourites' */ './pages/Favourites'),
@@ -35,7 +35,7 @@ const NotFound = React.lazy(() => import(/* webpackChunkName: 'NotFound' */ './p
 
 function App() {
   const dispatch = useAppDispatch();
-  const { searchValue } = useAppSelector(selectFilters);
+  const { searchValue, page } = useAppSelector(selectFilters);
   const isAuth = useAppSelector(selectIsAuth);
 
   const getProducts = async () => {
@@ -44,6 +44,7 @@ function App() {
     dispatch(
       fetchProducts({
         search,
+        page,
       }),
     );
   };
@@ -51,7 +52,7 @@ function App() {
   React.useEffect(() => {
     getProducts();
     dispatch(fetchAuthMe());
-  }, [searchValue, dispatch]);
+  }, [dispatch, searchValue, page]);
 
   return (
     <Routes>

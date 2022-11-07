@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Auth, AuthData } from './types';
 import axios from '../../axios';
-import { __String } from 'typescript';
 
 export const fetchRegister = createAsyncThunk<AuthData, Auth, { rejectValue: string }>(
   'auth/fetchRegister',

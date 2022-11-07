@@ -20,10 +20,14 @@ export enum Status {
 }
 
 export interface ProductSliceState {
+  total: number;
+  limit: number;
   products: Product[];
   status: Status;
 }
 
-export type FilterProductParams = {
-  search: string;
-};
+export interface ProductData {
+  total: number;
+  limit: number;
+  products: Product[];
+}

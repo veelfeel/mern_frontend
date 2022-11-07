@@ -40,7 +40,7 @@ const Dashboard = () => {
             Пользователи
           </NavLink>
         </div>
-        <div className="admin-dashboard__outlet">
+        <div className="admin-dashboard__product-list-wrapper">
           <Outlet />
         </div>
       </div>
