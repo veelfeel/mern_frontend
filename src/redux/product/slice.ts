@@ -1,12 +1,21 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
-import { Product, ProductSliceState, Status } from './types';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { FilterProductParams, Product, ProductSliceState, Status } from './types';
 
 import axios from '../../axios';
 
-export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
-  const { data } = await axios.get('/api/products');
-  return data;
+export const fetchProducts = createAsyncThunk<
+  Product[],
+  FilterProductParams,
+  { rejectValue: string }
+>('products/fetchProducts', async (params, { rejectWithValue }) => {
+  try {
+    const { search } = params;
+    const { data } = await axios.get(`/api/products?${search}`);
+    return data as Product[];
+  } catch (error) {
+    console.log(error);
+    return rejectWithValue('Не удалось получить продукты');
+  }
 });
 
 export const fetchRemoveProduct = createAsyncThunk<object, string, { rejectValue: string }>(

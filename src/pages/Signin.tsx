@@ -34,10 +34,6 @@ const Signin: React.FC = () => {
     return <Navigate to="/admin" />;
   }
 
-  // if (isAuth) {
-  //   return <Navigate to="/" />;
-  // }
-
   return (
     <div className="signin-screen">
       <div className="container">

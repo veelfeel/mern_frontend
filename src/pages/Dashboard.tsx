@@ -13,9 +13,9 @@ const Dashboard = () => {
     dispatch(logout());
   };
 
-  if (!isAuth) {
-    return <Navigate to="/" />;
-  }
+  // if (!isAuth) {
+  //   return <Navigate to="/" />;
+  // }
 
   return (
     <div className="admin-dashboard">

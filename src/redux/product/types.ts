@@ -23,3 +23,7 @@ export interface ProductSliceState {
   products: Product[];
   status: Status;
 }
+
+export type FilterProductParams = {
+  search: string;
+};

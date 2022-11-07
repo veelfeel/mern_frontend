@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import Loadable from 'react-loadable';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from './redux/store';
 import { selectIsAuth } from './redux/auth/selectors';
@@ -18,6 +18,7 @@ import Products from './components/admin/Products';
 import AddProduct from './components/admin/AddProduct';
 import Users from './components/admin/Users';
 import { fetchProducts } from './redux/product/slice';
+import { selectFilters } from './redux/filters/selectors';
 
 // const Favourites = Loadable({
 //   loader: () => import(/* webpackChunkName: 'Favourites' */ './pages/Favourites'),
@@ -34,12 +35,23 @@ const NotFound = React.lazy(() => import(/* webpackChunkName: 'NotFound' */ './p
 
 function App() {
   const dispatch = useAppDispatch();
+  const { searchValue } = useAppSelector(selectFilters);
   const isAuth = useAppSelector(selectIsAuth);
 
+  const getProducts = async () => {
+    const search = searchValue ? `&search=${searchValue}` : '';
+
+    dispatch(
+      fetchProducts({
+        search,
+      }),
+    );
+  };
+
   React.useEffect(() => {
+    getProducts();
     dispatch(fetchAuthMe());
-    dispatch(fetchProducts());
-  }, [dispatch]);
+  }, [searchValue, dispatch]);
 
   return (
     <Routes>

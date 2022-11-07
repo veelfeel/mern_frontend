@@ -6,11 +6,25 @@
     justify-content: space-between;
   }
 
-  & input {
+  & .input-search {
     margin-bottom: 26px;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #fff479;
+    position: relative;
+
+    & input {
+      padding: 10px 10px 10px 42px;
+      border-radius: 6px;
+      border: 1px solid #fff479;
+    }
+
+    & .svg-search {
+      width: 18px;
+      height: 18px;
+      opacity: 0.3;
+      left: 14px;
+      top: 9px;
+      pointer-events: none;
+      position: absolute;
+    }
   }
 
   & table {
