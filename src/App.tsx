@@ -35,15 +35,17 @@ const NotFound = React.lazy(() => import(/* webpackChunkName: 'NotFound' */ './p
 
 function App() {
   const dispatch = useAppDispatch();
-  const { searchValue, page } = useAppSelector(selectFilters);
+  const { searchValue, brandFilter, page } = useAppSelector(selectFilters);
   const isAuth = useAppSelector(selectIsAuth);
 
   const getProducts = async () => {
-    const search = searchValue ? `&search=${searchValue}` : '';
+    const search = searchValue ? `search=${searchValue}` : '';
+    const brand = brandFilter ? `brand=${brandFilter.join()}` : '';
 
     dispatch(
       fetchProducts({
         search,
+        brand,
         page,
       }),
     );
@@ -51,8 +53,11 @@ function App() {
 
   React.useEffect(() => {
     getProducts();
+  }, [searchValue, brandFilter, page]);
+
+  React.useEffect(() => {
     dispatch(fetchAuthMe());
-  }, [dispatch, searchValue, page]);
+  }, [dispatch]);
 
   return (
     <Routes>

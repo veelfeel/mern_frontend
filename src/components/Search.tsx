@@ -1,6 +1,6 @@
 import React from 'react';
-import { useAppDispatch } from '../../redux/store';
-import { setSearchValue } from '../../redux/filters/slice';
+import { useAppDispatch } from '../redux/store';
+import { setSearchValue } from '../redux/filters/slice';
 
 import debounce from 'lodash.debounce';
 

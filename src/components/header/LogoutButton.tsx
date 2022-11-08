@@ -1,6 +1,6 @@
 import React from 'react';
-import { useAppDispatch } from '../redux/store';
-import { logout } from '../redux/auth/slice';
+import { useAppDispatch } from '../../redux/store';
+import { logout } from '../../redux/auth/slice';
 import { useNavigate } from 'react-router-dom';
 
 export const LogoutButton: React.FC = () => {

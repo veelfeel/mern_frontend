@@ -12,7 +12,7 @@ import { CartItem } from '../redux/cart/types';
 const Product: React.FC = () => {
   const [product, setProduct] = React.useState<{
     _id: string;
-    name: string;
+    title: string;
     imageUrl: string;
     brand: string;
     country: string;
@@ -63,7 +63,7 @@ const Product: React.FC = () => {
   const onClickAdd = () => {
     const item: CartItem = {
       _id: product._id,
-      name: product.name,
+      title: product.title,
       price: product.price,
       count: 0,
       imageUrl: product.imageUrl,
@@ -82,8 +82,8 @@ const Product: React.FC = () => {
             </div>
             <span>Вернуться назад</span>
           </Link>
-          <img src={`../${product.imageUrl}`} alt={product.name} className="product-screen__img" />
-          <h3 className="product-screen__title">{product.name}</h3>
+          <img src={product.imageUrl} alt={product.title} className="product-screen__img" />
+          <h3 className="product-screen__title">{product.title}</h3>
           <CardRating />
           <div className="product-screen__text">
             <div className="product-screen__text-title">Характеристики</div>

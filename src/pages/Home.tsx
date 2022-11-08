@@ -2,18 +2,19 @@ import React from 'react';
 
 import { useAppSelector } from '../redux/store';
 import { selectProducts } from '../redux/product/selectors';
+import { Product } from '../redux/product/types';
 
 import {
   ContactOfPromo,
   CarouselOfPromo,
   TimerOfPromo,
   MoreButton,
-  PanelOfSort,
+  Sort,
   Loader,
   ProductBlock,
   Sidebar,
 } from '../components';
-import { Product } from '../redux/product/types';
+import { Pagination } from '../components/Pagination';
 
 const Home: React.FC = () => {
   const { products, status, total } = useAppSelector(selectProducts);
@@ -43,7 +44,7 @@ const Home: React.FC = () => {
         <div className="vitrina">
           <Sidebar />
           <div className="right-bar">
-            <PanelOfSort />
+            <Sort />
             <div className="products-container">
               {status === 'error' ? (
                 <div>
@@ -59,6 +60,7 @@ const Home: React.FC = () => {
               )}
             </div>
             <MoreButton />
+            <Pagination />
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Search } from './Search';
+import { Search } from '../Search';
 import { ProductList } from './ProductList';
 import { Pagination } from '../Pagination';
 

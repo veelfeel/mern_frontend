@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrandFilter } from './BrandFilter';
 
 export const Sidebar: React.FC = () => {
   return (
@@ -11,8 +12,8 @@ export const Sidebar: React.FC = () => {
         </button>
       </div>
 
-      <div id="filters">
-        <div className="sidebar__item" id="filters__click-render">
+      <div>
+        <div className="sidebar__item">
           <div className="sidebar__item-title">
             <button className="sidebar__title-btn">
               <span className="sidebar__title-btn-bar"></span>
@@ -20,7 +21,7 @@ export const Sidebar: React.FC = () => {
             </button>
             <h3 className="sidebar__title-category">Тип кондиционера</h3>
           </div>
-          <div className="sidebar__item-menu" id="type">
+          <div className="sidebar__item-menu">
             <div className="sidebar__category">
               <label className="sidebar__category-label">
                 <input
@@ -29,7 +30,7 @@ export const Sidebar: React.FC = () => {
                   defaultValue="standart"
                 />
                 Стандартные
-                <span className="sidebar__category-quantity" data-type="standart"></span>
+                <span className="sidebar__category-quantity"></span>
               </label>
             </div>
 
@@ -41,13 +42,13 @@ export const Sidebar: React.FC = () => {
                   defaultValue="invertor"
                 />
                 Инверторные
-                <span className="sidebar__category-quantity" data-type="invertor"></span>
+                <span className="sidebar__category-quantity"></span>
               </label>
             </div>
           </div>
         </div>
 
-        <div className="sidebar__item" id="filters__price-render">
+        <div className="sidebar__item">
           <div className="sidebar__item-title">
             <button className="sidebar__title-btn">
               <span className="sidebar__title-btn-bar"></span>
@@ -67,9 +68,7 @@ export const Sidebar: React.FC = () => {
                   id="price-min"
                   placeholder="14 000"
                 />
-                <span className="price-reset none" id="price-min-reset">
-                  {' '}
-                </span>
+                <span className="price-reset none"> </span>
               </div>
               <span className="price-input__span">-</span>
               <div className="price-input">
@@ -82,9 +81,7 @@ export const Sidebar: React.FC = () => {
                   id="price-max"
                   placeholder="300 000"
                 />
-                <span className="price-reset none" id="price-max-reset">
-                  {' '}
-                </span>
+                <span className="price-reset none"> </span>
               </div>
             </div>
             <div className="slider">
@@ -104,7 +101,7 @@ export const Sidebar: React.FC = () => {
           </div>
         </div>
 
-        <div className="sidebar__item" id="filters__click-render">
+        <div className="sidebar__item">
           <div className="sidebar__item-title">
             <button className="sidebar__title-btn">
               <span className="sidebar__title-btn-bar"></span>
@@ -112,7 +109,7 @@ export const Sidebar: React.FC = () => {
             </button>
             <h3 className="sidebar__title-category">Площадь помещения</h3>
           </div>
-          <div className="sidebar__item-menu" id="rangeArea">
+          <div className="sidebar__item-menu">
             <div className="sidebar__category">
               <label className="sidebar__category-label">
                 <input
@@ -121,7 +118,7 @@ export const Sidebar: React.FC = () => {
                   defaultValue="15м²-20м²"
                 />
                 15 м² - 20 м²
-                <span className="sidebar__category-quantity" data-rangearea="15м²-20м²"></span>
+                <span className="sidebar__category-quantity"></span>
               </label>
             </div>
             <div className="sidebar__category">
@@ -132,7 +129,7 @@ export const Sidebar: React.FC = () => {
                   defaultValue="25м²-30м²"
                 />
                 25 м² - 30 м²
-                <span className="sidebar__category-quantity" data-rangearea="25м²-30м²"></span>
+                <span className="sidebar__category-quantity"></span>
               </label>
             </div>
             <div className="sidebar__category">
@@ -143,7 +140,7 @@ export const Sidebar: React.FC = () => {
                   defaultValue="30м²-40м²"
                 />
                 30 м² - 40 м²
-                <span className="sidebar__category-quantity" data-rangearea="30м²-40м²"></span>
+                <span className="sidebar__category-quantity"></span>
               </label>
             </div>
             <div className="sidebar__category">
@@ -154,7 +151,7 @@ export const Sidebar: React.FC = () => {
                   defaultValue="40м²-50м²"
                 />
                 40 м² - 50 м²
-                <span className="sidebar__category-quantity" data-rangearea="40м²-50м²"></span>
+                <span className="sidebar__category-quantity"></span>
               </label>
             </div>
             <div className="sidebar__category">
@@ -165,7 +162,7 @@ export const Sidebar: React.FC = () => {
                   defaultValue="60м²-70м²"
                 />
                 60 м² - 70 м²
-                <span className="sidebar__category-quantity" data-rangearea="60м²-70м²"></span>
+                <span className="sidebar__category-quantity"></span>
               </label>
             </div>
             <div className="sidebar__category">
@@ -176,7 +173,7 @@ export const Sidebar: React.FC = () => {
                   defaultValue="70м²-80м²"
                 />
                 70 м² - 80 м²
-                <span className="sidebar__category-quantity" data-rangearea="70м²-80м²"></span>
+                <span className="sidebar__category-quantity"></span>
               </label>
             </div>
             <div className="sidebar__category">
@@ -187,131 +184,13 @@ export const Sidebar: React.FC = () => {
                   defaultValue="100м²"
                 />
                 100 м²
-                <span className="sidebar__category-quantity" data-rangearea="100м²"></span>
+                <span className="sidebar__category-quantity"></span>
               </label>
             </div>
           </div>
         </div>
-
-        <div className="sidebar__item" id="filters__click-render">
-          <div className="sidebar__item-title">
-            <button className="sidebar__title-btn">
-              <span className="sidebar__title-btn-bar"></span>
-              <span className="sidebar__title-btn-bar"></span>
-            </button>
-            <h3 className="sidebar__title-category">Бренд</h3>
-          </div>
-          <div className="sidebar__item-menu" id="brand">
-            <div className="sidebar__category">
-              <label className="sidebar__category-label">
-                <input
-                  type="checkbox"
-                  className="sidebar__category-checkbox"
-                  defaultValue="rovex"
-                />
-                Rovex
-                <span className="sidebar__category-quantity" data-brand="rovex"></span>
-              </label>
-            </div>
-            <div className="sidebar__category">
-              <label className="sidebar__category-label">
-                <input type="checkbox" className="sidebar__category-checkbox" defaultValue="jax" />
-                JAX
-                <span className="sidebar__category-quantity" data-brand="jax"></span>
-              </label>
-            </div>
-            <div className="sidebar__category">
-              <label className="sidebar__category-label">
-                <input
-                  type="checkbox"
-                  className="sidebar__category-checkbox"
-                  defaultValue="BALLU"
-                />
-                Ballu
-                <span className="sidebar__category-quantity" data-brand="ballu"></span>
-              </label>
-            </div>
-            <div className="sidebar__category">
-              <label className="sidebar__category-label">
-                <input
-                  type="checkbox"
-                  className="sidebar__category-checkbox"
-                  defaultValue="Electrolux"
-                />
-                Electrolux
-                <span className="sidebar__category-quantity" data-brand="electrolux"></span>
-              </label>
-            </div>
-            <div className="sidebar__category">
-              <label className="sidebar__category-label">
-                <input
-                  type="checkbox"
-                  className="sidebar__category-checkbox"
-                  defaultValue="Zanussi"
-                />
-                Zanussi
-                <span className="sidebar__category-quantity" data-brand="zanussi"></span>
-              </label>
-            </div>
-            <div className="sidebar__category">
-              <label className="sidebar__category-label">
-                <input
-                  type="checkbox"
-                  className="sidebar__category-checkbox"
-                  defaultValue="TOSHIBA"
-                />
-                Toshiba
-                <span className="sidebar__category-quantity" data-brand="toshiba"></span>
-              </label>
-            </div>
-            <div className="sidebar__category">
-              <label className="sidebar__category-label">
-                <input
-                  type="checkbox"
-                  className="sidebar__category-checkbox"
-                  defaultValue="SHUFT"
-                />
-                Shuft
-                <span className="sidebar__category-quantity" data-brand="shuft"></span>
-              </label>
-            </div>
-            <div className="sidebar__category">
-              <label className="sidebar__category-label">
-                <input
-                  type="checkbox"
-                  className="sidebar__category-checkbox"
-                  defaultValue="denko"
-                />
-                Denko
-                <span className="sidebar__category-quantity" data-brand="denko"></span>
-              </label>
-            </div>
-            <div className="sidebar__category">
-              <label className="sidebar__category-label">
-                <input
-                  type="checkbox"
-                  className="sidebar__category-checkbox"
-                  defaultValue="centek"
-                />
-                Centek
-                <span className="sidebar__category-quantity" data-brand="centek"></span>
-              </label>
-            </div>
-            <div className="sidebar__category">
-              <label className="sidebar__category-label">
-                <input
-                  type="checkbox"
-                  className="sidebar__category-checkbox"
-                  defaultValue="lessar"
-                />
-                Lessar
-                <span className="sidebar__category-quantity" data-brand="lessar"></span>
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div className="sidebar__item" id="filters__click-render">
+        <BrandFilter />
+        <div className="sidebar__item">
           <div className="sidebar__item-title">
             <button className="sidebar__title-btn">
               <span className="sidebar__title-btn-bar"></span>
@@ -319,7 +198,7 @@ export const Sidebar: React.FC = () => {
             </button>
             <h3 className="sidebar__title-category">Страна-производитель</h3>
           </div>
-          <div className="sidebar__item-menu" id="country">
+          <div className="sidebar__item-menu">
             <label className="country-child">
               <input
                 className="country-child__input"

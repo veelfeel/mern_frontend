@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import { useAppSelector } from '../redux/store';
-import { selectIsAuth } from '../redux/auth/selectors';
+import { useAppSelector } from '../../redux/store';
+import { selectIsAuth } from '../../redux/auth/selectors';
 
-import { Search } from './admin/Search';
+import { Search } from '../Search';
 import { CartLink } from './CartLink';
 import { LogoutButton } from './LogoutButton';
 

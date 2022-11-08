@@ -104,7 +104,7 @@ export const ProductBlock: React.FC<ProductBlockProps> = ({
         </div>
         <AddFavouritesButton />
         <button onClick={onClickAdd} className="product-block-button button-primary">
-          Купить
+          + Добавить
         </button>
         <span className="product-block__count-in-stock">В наличии: {countInStock} шт.</span>
         <span className="product-block__delivery"> Бесплатная доставка</span>

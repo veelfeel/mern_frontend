@@ -46,16 +46,17 @@ footer {
 }
 
 .social-item:first-child {
-  margin-right: 2rem;
+  margin-right: 20px;
 }
 
 .social-link {
   display: block;
   width: 30px;
   height: 30px;
-  border-radius: 4px;
-  background-repeat: no-repeat;
-  background-position: left center;
+
+  & img {
+    border-radius: 4px;
+  }
 }
 
 .footer-info {

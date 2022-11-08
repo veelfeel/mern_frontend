@@ -9,9 +9,9 @@ export const fetchProducts = createAsyncThunk<
   { rejectValue: string }
 >('products/fetchProducts', async (params, { rejectWithValue }) => {
   try {
-    const { search, page } = params;
-    const { data } = await axios.get(`/api/products?page=${page}&${search}`);
-    // console.log(data);
+    const { search, brand, page } = params;
+    const { data } = await axios.get(`/api/products?page=${page}&${brand}&${search}`);
+    console.log(data);
     return data as ProductData;
   } catch (error) {
     console.log(error);

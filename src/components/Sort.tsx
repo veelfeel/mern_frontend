@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const PanelOfSort: React.FC = () => {
+export const Sort: React.FC = () => {
   return (
     <div className="category-head">
       <div className="category-sort__group">

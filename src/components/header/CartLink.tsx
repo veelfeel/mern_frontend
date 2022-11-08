@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { selectCart } from '../redux/cart/selectors';
-import { CartItem } from '../redux/cart/types';
-import { useAppSelector } from '../redux/store';
+import { selectCart } from '../../redux/cart/selectors';
+import { CartItem } from '../../redux/cart/types';
+import { useAppSelector } from '../../redux/store';
 
 export const CartLink = () => {
   const { items } = useAppSelector(selectCart);

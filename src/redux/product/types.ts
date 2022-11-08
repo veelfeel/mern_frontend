@@ -22,6 +22,7 @@ export enum Status {
 export interface ProductSliceState {
   total: number;
   limit: number;
+  brands: string[];
   products: Product[];
   status: Status;
 }
@@ -29,5 +30,6 @@ export interface ProductSliceState {
 export interface ProductData {
   total: number;
   limit: number;
+  brands: string[];
   products: Product[];
 }
