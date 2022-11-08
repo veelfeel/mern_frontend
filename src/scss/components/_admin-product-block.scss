@@ -1,23 +1,38 @@
 .admin-product-block {
   &__id {
-    text-align: left;
+    padding: 0 20px;
   }
 
   &__img {
     width: 100px;
-    height: 50px;
+    height: 80px;
+    border-radius: 4px;
     object-fit: cover;
+    display: block;
+    margin: auto;
   }
 
   &__title {
     font-weight: 500;
     font-size: 15px;
-    text-align: left;
+    text-align: center;
   }
 
   &__price {
     font-size: 18px;
-    text-align: left;
+    text-align: center;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    & button {
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
   }
 
   &__button-delete {
@@ -25,5 +40,13 @@
     font-weight: 500;
     background: none;
     color: #999;
+  }
+
+  &.skeleton {
+    height: 108px;
+
+    &:not(:last-child) {
+      margin-bottom: 8px;
+    }
   }
 }

@@ -30,6 +30,10 @@ const Signin: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  if (isAuth && !isAdmin) {
+    return <Navigate to="/" />;
+  }
+
   if (isAuth && isAdmin) {
     return <Navigate to="/admin" />;
   }

@@ -8,23 +8,6 @@
 
   & .input-search {
     margin-bottom: 26px;
-    position: relative;
-
-    & input {
-      padding: 10px 10px 10px 42px;
-      border-radius: 6px;
-      border: 1px solid #fff479;
-    }
-
-    & .svg-search {
-      width: 18px;
-      height: 18px;
-      opacity: 0.3;
-      left: 14px;
-      top: 9px;
-      pointer-events: none;
-      position: absolute;
-    }
   }
 
   & table {
@@ -36,7 +19,7 @@
 
     & thead {
       & th {
-        border: 1px solid #e7e7e7;
+        border: 1px solid #ffffad;
         padding: 12px;
         font-weight: 500;
         background-color: #ffffad;
@@ -54,12 +37,12 @@
         &:nth-child(even) {
           background: #f7f7f7;
         }
-      }
 
-      & td {
-        padding: 30px;
-        border: 1px solid #e7e7e7;
-        text-align: center;
+        & td {
+          height: 115px;
+          // border: 1px solid #e7e7e7;
+          // text-align: center;
+        }
       }
     }
   }

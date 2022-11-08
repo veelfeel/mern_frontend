@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { useAppDispatch, useAppSelector } from '../redux/store';
+import { useAppSelector } from '../redux/store';
 import { selectProducts } from '../redux/product/selectors';
-import { fetchProducts } from '../redux/product/slice';
 
 import {
   ContactOfPromo,
@@ -17,14 +16,9 @@ import {
 import { Product } from '../redux/product/types';
 
 const Home: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const { products, status } = useAppSelector(selectProducts);
+  const { products, status, total } = useAppSelector(selectProducts);
 
   const productBlocks = products.map((obj: Product) => <ProductBlock key={obj._id} {...obj} />);
-
-  // React.useEffect(() => {
-  //   dispatch(fetchProducts());
-  // }, [dispatch]);
 
   return (
     <>
@@ -38,10 +32,14 @@ const Home: React.FC = () => {
         </div>
       </div>
       <div className="container padding-bottom">
-        <div className="page__title">
-          <h1 className="title">Кондиционеры (сплит-системы)</h1>
-          <span> {products.length} товаров</span>
-        </div>
+        {status === 'loading' ? (
+          <div className="page__title skeleton"></div>
+        ) : (
+          <div className="page__title">
+            <h1 className="title">Кондиционеры (сплит-системы)</h1>
+            <span> {total} товаров</span>
+          </div>
+        )}
         <div className="vitrina">
           <Sidebar />
           <div className="right-bar">
@@ -55,7 +53,7 @@ const Home: React.FC = () => {
                   </p>
                 </div>
               ) : status === 'loading' ? (
-                <Loader />
+                <Loader className={'product-block'} />
               ) : (
                 productBlocks
               )}

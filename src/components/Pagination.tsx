@@ -1,11 +1,11 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { setCurrentPage } from '../redux/filters/slice';
+import { selectProducts } from '../redux/product/selectors';
 
 export const Pagination = () => {
   const dispatch = useAppDispatch();
-  const total = useAppSelector((state) => state.products.total);
-  const limit = useAppSelector((state) => state.products.limit);
+  const { total, limit } = useAppSelector(selectProducts);
   const page = useAppSelector((state) => state.filters.page);
   const totalPages = Math.ceil(total / limit);
 

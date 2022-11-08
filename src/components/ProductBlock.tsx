@@ -54,7 +54,7 @@ export const ProductBlock: React.FC<ProductBlockProps> = ({
       <div className="product-block__inner-img">
         <img className="product-block__img" src={imageUrl} alt={title} />
       </div>
-      <Link to={'/product/' + _id}>
+      <Link to={`/product/${_id}`}>
         <h4 className="product-block__title text-primary">{title}</h4>
       </Link>
       <CardRating />

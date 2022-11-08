@@ -4,7 +4,7 @@ import { setSearchValue } from '../../redux/filters/slice';
 
 import debounce from 'lodash.debounce';
 
-export const Search: React.FC = () => {
+export const Search: React.FC<React.InputHTMLAttributes<HTMLInputElement>> = ({ placeholder }) => {
   const dispatch = useAppDispatch();
   const [value, setValue] = React.useState('');
 
@@ -22,7 +22,7 @@ export const Search: React.FC = () => {
 
   return (
     <div className="input-search">
-      <input value={value} onChange={onChangeInput} placeholder="Поиск товара..." />
+      <input value={value} onChange={onChangeInput} placeholder={placeholder} />
       <svg
         className="svg-search"
         width="20"

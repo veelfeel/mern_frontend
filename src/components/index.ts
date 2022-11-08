@@ -8,7 +8,6 @@ export * from './CartEmpty';
 export * from './CartTotalDetails';
 export * from './ContactOfPromo';
 export * from './Loader';
-export * from './Message';
 export * from './MoreButton';
 export * from './Order';
 export * from './PanelOfSort';

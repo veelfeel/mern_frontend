@@ -11,7 +11,7 @@ export const fetchProducts = createAsyncThunk<
   try {
     const { search, page } = params;
     const { data } = await axios.get(`/api/products?page=${page}&${search}`);
-    console.log(data);
+    // console.log(data);
     return data as ProductData;
   } catch (error) {
     console.log(error);

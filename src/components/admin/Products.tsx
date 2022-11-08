@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { Search } from './Search';
+import { ProductList } from './ProductList';
 import { Pagination } from '../Pagination';
 
-import { ProductList } from './ProductList';
-import { Search } from './Search';
-
 const Products: React.FC = () => {
+  const location = useLocation();
+
   return (
     <div className="admin-products">
       <div className="admin-products__header">
@@ -15,7 +16,7 @@ const Products: React.FC = () => {
           <div>Добавить товар</div>
         </Link>
       </div>
-      <Search />
+      {location.pathname === '/admin/products' && <Search placeholder={'Поиск товара...'} />}
       <ProductList />
       <Pagination />
     </div>

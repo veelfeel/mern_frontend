@@ -1,30 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { useAppSelector } from '../redux/store';
-import { selectCart } from '../redux/cart/selectors';
 import { selectIsAuth } from '../redux/auth/selectors';
 
-import { CartItem } from '../redux/cart/types';
+import { Search } from './admin/Search';
+import { CartLink } from './CartLink';
+import { LogoutButton } from './LogoutButton';
 
 export const Header: React.FC = () => {
+  const location = useLocation();
   const isAuth = useAppSelector(selectIsAuth);
   const isAdmin = useAppSelector((state) => state.auth.data?.isAdmin);
   const name = useAppSelector((state) => state.auth.data?.fullName);
-
-  const { items } = useAppSelector(selectCart);
-  const totalCount = items.reduce((sum: number, item: CartItem) => sum + item.count, 0);
-
-  const isMounted = React.useRef(false);
-
-  React.useEffect(() => {
-    if (isMounted.current) {
-      const json = JSON.stringify(items);
-      localStorage.setItem('cart', json);
-    }
-
-    isMounted.current = true;
-  }, [items]);
 
   return (
     <header>
@@ -80,50 +68,37 @@ export const Header: React.FC = () => {
                 </div>
               </Link>
             </div>
-            <div className="header__search-group">
-              <input className="header__input-search" type="search" placeholder="Поиск по сайту" />
-              <span className="header__search-cansel">
-                <div className="header__search-cansel-bar"></div>
-                <div className="header__search-cansel-bar"></div>
-              </span>
-              <button className="header__search-btn">
-                <svg className="header__search-image" viewBox="0 0 17 17">
-                  <path d="M10.5513 10.6898C10.6445 10.5972 10.755 10.5238 10.8766 10.4739C10.9982 10.424 11.1284 10.3986 11.2598 10.399C11.3912 10.3995 11.5212 10.4259 11.6425 10.4766C11.7637 10.5274 11.8737 10.6015 11.9662 10.6948L15.8026 14.5584C15.9896 14.7466 16.0941 15.0014 16.0933 15.2666C16.0924 15.5319 15.9863 15.786 15.7981 15.9729C15.6099 16.1599 15.3552 16.2645 15.0899 16.2636C14.8246 16.2628 14.5706 16.1566 14.3836 15.9684L10.5472 12.1048C10.4546 12.0116 10.3812 11.9011 10.3313 11.7795C10.2814 11.6579 10.256 11.5277 10.2565 11.3963C10.2569 11.2649 10.2833 11.1348 10.334 11.0136C10.3848 10.8924 10.458 10.7824 10.5513 10.6898Z" />
-                  <path d="M6.60371 12.2339C7.32597 12.2364 8.04167 12.0967 8.70994 11.8227C9.3782 11.5486 9.98595 11.1457 10.4985 10.6367C11.011 10.1278 11.4183 9.52296 11.697 8.85665C11.9758 8.19035 12.1206 7.47566 12.1231 6.75339C12.1257 6.03112 11.986 5.31543 11.7119 4.64716C11.4379 3.9789 11.0349 3.37115 10.526 2.85862C10.0171 2.3461 9.41223 1.93882 8.74592 1.66006C8.07961 1.3813 7.36492 1.23651 6.64266 1.23395C5.18398 1.22878 3.78299 1.80329 2.74789 2.83108C1.7128 3.85887 1.12838 5.25576 1.12322 6.71444C1.11805 8.17312 1.69256 9.57411 2.72035 10.6092C3.74814 11.6443 5.14502 12.2287 6.60371 12.2339ZM13.1231 6.75693C13.117 8.48083 12.4264 10.1317 11.2031 11.3464C9.97978 12.561 8.32406 13.24 6.60017 13.2339C4.87627 13.2278 3.2254 12.5371 2.01074 11.3138C0.796079 10.0905 0.117118 8.43479 0.123223 6.7109C0.129328 4.987 0.819997 3.33614 2.04329 2.12147C3.26659 0.906811 4.9223 0.22785 6.6462 0.233955C8.3701 0.240059 10.021 0.930729 11.2356 2.15402C12.4503 3.37732 13.1292 5.03303 13.1231 6.75693Z" />
-                </svg>
-              </button>
-              <ul className="header__search-variants none"></ul>
-            </div>
+            {location.pathname === '/' && <Search placeholder={'Поиск по сайту...'} />}
             <div className="header__right-links">
-              <Link to="/favourites">
-                <svg className="header__favourites-image" viewBox="0 0 44 39">
-                  <path d="M5.09726 5.01265C9.22694 0.995783 15.9225 0.995783 20.0522 5.01265L22 6.90728L23.9478 5.01265C28.0775 0.995783 34.7731 0.995783 38.9027 5.01265C43.0324 9.02952 43.0324 15.5421 38.9027 19.559L22 36L5.09726 19.559C0.96758 15.5421 0.96758 9.02952 5.09726 5.01265Z" />
-                </svg>
-                <div className="header__favourites-image-counter">
-                  <span className="header__favourites-image-counter-text"></span>
-                </div>
-                <span>Избранное</span>
-              </Link>
-              {
-                <Link
-                  to={isAuth && !isAdmin ? '/profile' : isAuth && isAdmin ? '/admin' : '/signin'}>
-                  <svg className="header__signin-image" viewBox="0 0 66 63">
-                    <circle cx="33" cy="20" r="19" />
-                    <path d="M1 62V62C14.778 36.5886 51.574 36.4008 65 62V62" />
+              {location.pathname.startsWith('/profile') ||
+              location.pathname.startsWith('/admin') ? (
+                ''
+              ) : (
+                <Link to="/favourites">
+                  <svg className="header__favourites-image" viewBox="0 0 44 39">
+                    <path d="M5.09726 5.01265C9.22694 0.995783 15.9225 0.995783 20.0522 5.01265L22 6.90728L23.9478 5.01265C28.0775 0.995783 34.7731 0.995783 38.9027 5.01265C43.0324 9.02952 43.0324 15.5421 38.9027 19.559L22 36L5.09726 19.559C0.96758 15.5421 0.96758 9.02952 5.09726 5.01265Z" />
                   </svg>
-                  <span>{isAuth ? name : 'Войти'}</span>
+                  <div className="header__favourites-image-counter">
+                    <span className="header__favourites-image-counter-text"></span>
+                  </div>
+                  <span>Избранное</span>
                 </Link>
-              }
-
-              <Link to="/cart">
-                <svg className="header__cart-image" viewBox="0 0 24 25">
-                  <path d="M9 22.5C9.55228 22.5 10 22.0523 10 21.5C10 20.9477 9.55228 20.5 9 20.5C8.44772 20.5 8 20.9477 8 21.5C8 22.0523 8.44772 22.5 9 22.5Z" />
-                  <path d="M20 22.5C20.5523 22.5 21 22.0523 21 21.5C21 20.9477 20.5523 20.5 20 20.5C19.4477 20.5 19 20.9477 19 21.5C19 22.0523 19.4477 22.5 20 22.5Z" />
-                  <path d="M1 1.5H5L7.68 14.89C7.77144 15.3504 8.02191 15.764 8.38755 16.0583C8.75318 16.3526 9.2107 16.509 9.68 16.5H19.4C19.8693 16.509 20.3268 16.3526 20.6925 16.0583C21.0581 15.764 21.3086 15.3504 21.4 14.89L23 6.5H6" />
+              )}
+              <Link to={isAuth && !isAdmin ? '/profile' : isAuth && isAdmin ? '/admin' : '/signin'}>
+                <svg className="header__signin-image" viewBox="0 0 66 63">
+                  <circle cx="33" cy="20" r="19" />
+                  <path d="M1 62V62C14.778 36.5886 51.574 36.4008 65 62V62" />
                 </svg>
-                {totalCount !== 0 && <span>{totalCount}</span>}
-                <span>Корзина</span>
+                <span>{isAuth ? name : 'Войти'}</span>
               </Link>
+              {location.pathname.startsWith('/profile') ||
+              location.pathname.startsWith('/admin') ? (
+                <LogoutButton />
+              ) : (
+                ''
+              )}
+              {location.pathname.startsWith('/profile') ||
+                (location.pathname.startsWith('/admin') ? '' : <CartLink />)}
             </div>
           </div>
         </div>

@@ -1,9 +1,11 @@
 import React from 'react';
 
-export const Loader: React.FC = () => {
+export const Loader: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className }) => {
   return (
-    <div className="overlay" id="loader-overlay">
-      <div className="spinner"></div>
-    </div>
+    <>
+      {[...Array(5)].map((val, index) => (
+        <div key={index} className={`${className} skeleton`}></div>
+      ))}
+    </>
   );
 };

@@ -1,7 +1,6 @@
 @import 'vars';
 @import 'fonts';
 
-@import 'components/loader';
 @import 'components/header';
 @import 'components/promo';
 @import 'components/sidebar';
@@ -9,7 +8,6 @@
 @import 'components/category-panel';
 @import 'components/product-block';
 @import 'components/product-counter';
-@import 'components/product-not-found';
 @import 'components/more-button';
 @import 'components/footer';
 
@@ -114,6 +112,20 @@ input {
   font-family: inherit;
 }
 
+.skeleton {
+  border-radius: 10px;
+  background: #eee;
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  background-size: 200% 100%;
+  animation: 1.5s skeleton linear infinite;
+
+  @keyframes skeleton {
+    to {
+      background-position-x: -200%;
+    }
+  }
+}
+
 .container {
   max-width: 1185px;
   margin: 0 auto;
@@ -159,6 +171,12 @@ input {
   align-items: center;
   font-weight: 600;
 
+  &.skeleton {
+    margin-bottom: 16px;
+    height: 30px;
+    width: 640px;
+  }
+
   & .title {
     margin-right: 12px;
     font-size: 30px;
@@ -166,6 +184,27 @@ input {
 
   & span {
     font-size: 30px;
+  }
+}
+
+.input-search {
+  position: relative;
+
+  & input {
+    width: 340px;
+    padding: 10px 10px 10px 42px;
+    border-radius: 6px;
+    border: 1px solid #fff479;
+  }
+
+  & .svg-search {
+    width: 18px;
+    height: 18px;
+    opacity: 0.3;
+    left: 14px;
+    top: 9px;
+    pointer-events: none;
+    position: absolute;
   }
 }
 
@@ -231,47 +270,9 @@ input {
   padding-bottom: 60px;
 }
 
-.message-wrapper {
-  z-index: 111;
-  position: fixed;
-  width: 100%;
-  min-height: 100vh;
-  background-color: #00000014;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-}
-
-.message-overlay-content {
-  padding: 40px;
-  border-radius: 6px;
-  background-color: white;
-
-  & button {
-    width: 100%;
-    height: 48px;
-    border-radius: 10px;
-    border: 1px solid $primary;
-    font-weight: 500;
-    color: orange;
-
-    &:hover {
-      background-color: $primary;
-      color: white;
-    }
-  }
-}
-
-.message-overlay-text {
-  padding-bottom: 17px;
-  font-size: 16px;
-}
-
 .logout-button {
   padding: 10px 10px 10px 8px;
   border-radius: 10px;
-  background-color: #fffac4;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -289,9 +290,9 @@ input {
   }
 
   & span {
-    font-size: 14px;
-    font-weight: 500;
-    color: #434343;
+    font-size: 15px;
+    font-weight: 600;
+    color: #ff9900;
   }
 }
 

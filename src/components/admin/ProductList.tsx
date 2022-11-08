@@ -12,25 +12,28 @@ export const ProductList: React.FC = () => {
   const { products, status } = useAppSelector(selectProducts);
   const productBlocks = products.map((obj: Product) => <ProductBlock key={obj._id} {...obj} />);
 
-  if (status === 'loading') {
-    return <Loader />;
-  }
-
-  if (status === 'error') {
-    return <ErrorLoading />;
-  }
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>id</th>
-          <th>Изображение</th>
-          <th>Название</th>
-          <th>Цена</th>
-          <th>Действия</th>
-        </tr>
-      </thead>
-      <tbody>{productBlocks}</tbody>
-    </table>
+    <>
+      <table>
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Изображение</th>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+      </table>
+      {status === 'loading' ? (
+        <Loader className={'admin-product-block'} />
+      ) : status === 'error' ? (
+        <ErrorLoading />
+      ) : (
+        <table>
+          <tbody>{productBlocks}</tbody>
+        </table>
+      )}
+    </>
   );
 };

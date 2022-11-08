@@ -13,7 +13,7 @@ export const ProductBlock: React.FC<Product> = ({ _id, title, price, imageUrl })
   };
 
   return (
-    <tr>
+    <tr className="admin-product-block">
       <td>
         <div className="admin-product-block__id">{_id}</div>
       </td>
@@ -26,7 +26,10 @@ export const ProductBlock: React.FC<Product> = ({ _id, title, price, imageUrl })
         </Link>
       </td>
       <td className="admin-product-block__price">{price.toLocaleString()} ₽</td>
-      <td>
+      <td className="admin-product-block__actions">
+        <button onClick={onClickRemove} className="admin-product-block__button-delete text-primary">
+          Редактировать
+        </button>
         <button onClick={onClickRemove} className="admin-product-block__button-delete text-primary">
           Удалить
         </button>
