@@ -35,17 +35,24 @@ const NotFound = React.lazy(() => import(/* webpackChunkName: 'NotFound' */ './p
 
 function App() {
   const dispatch = useAppDispatch();
-  const { searchValue, brandFilter, page } = useAppSelector(selectFilters);
+  const { searchValue, inverterFilter, areaFilter, brandFilter, countryFilter, page } =
+    useAppSelector(selectFilters);
   const isAuth = useAppSelector(selectIsAuth);
 
   const getProducts = async () => {
-    const search = searchValue ? `search=${searchValue}` : '';
-    const brand = brandFilter ? `brand=${brandFilter.join()}` : '';
+    const search = searchValue ? `&search=${searchValue}` : '';
+    const inverter = inverterFilter.length > 0 ? `&inverter=${inverterFilter.join()}` : '';
+    const area = areaFilter.length > 0 ? `&area=${areaFilter.join()}` : '';
+    const brand = brandFilter.length > 0 ? `&brand=${brandFilter.join()}` : '';
+    const country = `&country=${countryFilter}`;
 
     dispatch(
       fetchProducts({
         search,
+        inverter,
+        area,
         brand,
+        country,
         page,
       }),
     );
@@ -53,7 +60,7 @@ function App() {
 
   React.useEffect(() => {
     getProducts();
-  }, [searchValue, brandFilter, page]);
+  }, [searchValue, inverterFilter, areaFilter, brandFilter, countryFilter, page]);
 
   React.useEffect(() => {
     dispatch(fetchAuthMe());

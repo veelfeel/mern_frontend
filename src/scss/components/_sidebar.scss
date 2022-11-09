@@ -109,9 +109,7 @@
   background: none;
   border: none;
   transition: 0.2s ease;
-  margin-right: 10px;
   margin-left: 3px;
-  padding: 0;
 }
 
 .sidebar__title-btn--rotate {
@@ -138,7 +136,7 @@
 }
 
 .sidebar__title-category {
-  margin: 0;
+  padding-left: 16px;
   font-size: 0.85rem;
   user-select: none;
 }

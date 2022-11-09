@@ -22,7 +22,10 @@ export enum Status {
 export interface ProductSliceState {
   total: number;
   limit: number;
+  inverterTechnology: string[];
+  areas: string[];
   brands: string[];
+  countries: string[];
   products: Product[];
   status: Status;
 }
@@ -30,6 +33,9 @@ export interface ProductSliceState {
 export interface ProductData {
   total: number;
   limit: number;
+  inverterTechnology: string[];
+  areas: string[];
   brands: string[];
+  countries: string[];
   products: Product[];
 }
