@@ -41,7 +41,7 @@ function App() {
 
   const getProducts = async () => {
     const search = searchValue ? `&search=${searchValue}` : '';
-    const inverter = inverterFilter.length > 0 ? `&inverter=${inverterFilter.join()}` : '';
+    const inverter = inverterFilter.length > 0 ? `&inverter=${inverterFilter.toString()}` : '';
     const area = areaFilter.length > 0 ? `&area=${areaFilter.join()}` : '';
     const brand = brandFilter.length > 0 ? `&brand=${brandFilter.join()}` : '';
     const country = `&country=${countryFilter}`;
