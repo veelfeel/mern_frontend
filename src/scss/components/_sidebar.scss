@@ -225,19 +225,6 @@
   transition: 0.3s;
 }
 
-.input-text {
-  height: 44px;
-  font-size: 14px;
-  border-radius: 6px;
-  border: 1px solid #d5d5d5;
-  outline: none;
-  padding: 0 12px 0 28px;
-}
-
-.input-text:focus {
-  border: 1px solid $primary;
-}
-
 .price-input__button {
   z-index: 1;
   position: absolute;

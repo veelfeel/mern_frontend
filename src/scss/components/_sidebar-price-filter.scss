@@ -1,10 +1,9 @@
-.price-group {
+.price-content {
   padding: 8px 0 0;
-  margin-bottom: 28px;
+  padding-bottom: 28px;
   display: flex;
   align-items: center;
   font-weight: 600;
-  position: relative;
 }
 
 .row[data-temp='grid'] .price-group {
@@ -13,17 +12,37 @@
   line-height: 1;
 }
 
-.price-input {
+.price-input-group {
+  width: 50%;
   position: relative;
-}
 
-.price-input__text {
-  position: absolute;
-  top: 16px;
-  left: 10px;
-  color: #303030;
-  font-weight: 300;
-  font-size: 12px;
+  & span {
+    position: absolute;
+    top: 16px;
+    left: 10px;
+    color: #303030;
+    font-weight: 300;
+    font-size: 12px;
+    pointer-events: none;
+  }
+
+  & input {
+    height: 44px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #d5d5d5;
+    outline: none;
+    padding: 0 12px 0 28px;
+
+    &:focus {
+      border-color: rgb(255 217 0 / 38%);
+      outline: 3px solid rgb(255 235 124 / 38%);
+    }
+
+    &::placeholder {
+      color: #a7a7a7;
+    }
+  }
 }
 
 .price-reset {
@@ -62,37 +81,15 @@
   top: 2px;
   height: 2px;
   position: relative;
-  background: #ddd;
+  background-color: #ddd;
   border-radius: 5px;
 }
 
 .progress {
   height: 100%;
-  right: 0;
-  left: 0;
   position: absolute;
   border-radius: 5px;
-  background: $primary;
-}
-
-.multi-range {
-  position: relative;
-}
-
-.multi-range input[type='range']:nth-child(1)::-webkit-slider-thumb::before {
-  background-color: #808080;
-}
-
-.multi-range input[type='range']:nth-child(2) {
-  background: none;
-}
-
-.multi-range input[type='range']:nth-child(2)::-webkit-slider-thumb::before {
-  background-color: #808080;
-}
-
-.multi-range input[type='range']::-moz-range-track {
-  background: none;
+  background-color: #ffd15d;
 }
 
 input[type='range'] {
@@ -121,22 +118,34 @@ input[type='range']::-moz-range-thumb {
   position: relative;
   height: 19px;
   width: 19px;
-  margin: 5px 0;
   border-radius: 50%;
-  border: 1px solid $primary;
+  border: 2px solid #ffd15d;
+  outline: transparent;
   background-color: #fff;
   appearance: none;
   pointer-events: all;
+  transition: $transition;
+
+  &:active {
+    outline: 6px solid #ffd15d63;
+    transition: $transition;
+  }
 }
 
 input[type='range']::-webkit-slider-thumb {
   position: relative;
   height: 19px;
   width: 19px;
-  margin: 5px 0;
   border-radius: 50%;
-  border: 1px solid $primary;
-  background-color: #fff;
+  border: 2px solid #ffd15d;
+  outline: transparent;
+  background-color: white;
   appearance: none;
   pointer-events: all;
+  transition: $transition;
+
+  &:active {
+    outline: 6px solid #ffd15d63;
+    transition: $transition;
+  }
 }
