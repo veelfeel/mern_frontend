@@ -1,20 +1,24 @@
 import React from 'react';
+// import { InputMask } from './InputMask';
 
 export const PriceFilter = () => {
-  const [minValueInput, setMinValueInput] = React.useState<string>('0');
-  const [maxValueInput, setMaxValueInput] = React.useState<string>('100');
+  const minPrice = 0;
+  const maxPrice = 120000;
 
-  const [minValueRange, setMinValueRange] = React.useState<string>('0');
-  const [maxValueRange, setMaxValueRange] = React.useState<string>('100');
+  const [minValueInput, setMinValueInput] = React.useState<string>('15000');
+  const [maxValueInput, setMaxValueInput] = React.useState<string>('60000');
+
+  const [minValueRange, setMinValueRange] = React.useState<string>('15000');
+  const [maxValueRange, setMaxValueRange] = React.useState<string>('60000');
 
   const styles = {
-    left: `${minValueRange}%`,
-    right: `${100 - Number(maxValueRange)}%`,
+    left: `${(Number(minValueRange) / maxPrice) * 100}%`,
+    right: `${100 - (Number(maxValueRange) / maxPrice) * 100}%`,
   };
 
   const changePriceMin = () => {
     const value = Number(minValueInput);
-    const newMinVal = Math.min(value, 100);
+    const newMinVal = Math.min(value, maxPrice);
     setMinValueInput(String(newMinVal));
     setMinValueRange(String(newMinVal));
 
@@ -25,7 +29,7 @@ export const PriceFilter = () => {
 
   const changePriceMax = () => {
     const value = Number(maxValueInput);
-    const newMinVal = Math.min(value, 100);
+    const newMinVal = Math.min(value, maxPrice);
     setMaxValueInput(String(newMinVal));
     setMaxValueRange(String(newMinVal));
 
@@ -86,32 +90,35 @@ export const PriceFilter = () => {
         <h3 className="sidebar__title-category">Цена</h3>
       </div>
       <div className="sidebar__item-menu padding">
+        {/* <InputMask /> */}
         <div className="price-content">
           <div className="price-input-group">
-            <span> от </span>
+            {/* <span> от </span>
+            <span>₽</span> */}
             <input
               value={minValueInput}
               onChange={onChangeMinInput}
               onBlur={onBlurMin}
               onKeyDown={onKeyDownMin}
-              min="0"
-              max="100"
-              placeholder="0"
+              min={minPrice}
+              max={maxPrice}
+              placeholder={String(minPrice)}
               type="number"
             />
             <span className="price-reset none"> </span>
           </div>
           <span className="price-input__span">-</span>
           <div className="price-input-group">
-            <span> до </span>
+            {/* <span> до </span>
+            <span>₽</span> */}
             <input
               value={maxValueInput}
               onChange={onChangeMaxInput}
               onBlur={onBlurMax}
               onKeyDown={onKeyDownMax}
-              min="0"
-              max="100"
-              placeholder="100"
+              min={minPrice}
+              max={maxPrice}
+              placeholder={String(maxPrice)}
               type="number"
             />
             <span className="price-reset none"> </span>
@@ -119,8 +126,22 @@ export const PriceFilter = () => {
         </div>
         <div className="slider">
           <div className="progress" style={styles}></div>
-          <input value={minValueRange} onChange={onChangeMinRange} min="0" max="100" type="range" />
-          <input value={maxValueRange} onChange={onChangeMaxRange} min="0" max="100" type="range" />
+          <input
+            value={minValueRange}
+            onChange={onChangeMinRange}
+            min={minPrice}
+            max={maxPrice}
+            step={100}
+            type="range"
+          />
+          <input
+            value={maxValueRange}
+            onChange={onChangeMaxRange}
+            min={minPrice}
+            max={maxPrice}
+            step={100}
+            type="range"
+          />
         </div>
       </div>
     </div>
