@@ -3,7 +3,7 @@ import { useAppDispatch } from '../../redux/store';
 import { setMaxPriceFilter, setMinPriceFilter } from '../../redux/filters/slice';
 import { addSpaces, removeSpaces } from '../../utils/normalizePrice';
 
-export const PriceFilter = () => {
+export const PriceFilter: React.FC = () => {
   const minPrice = '0';
   const maxPrice = '120000';
 

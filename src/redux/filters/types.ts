@@ -1,3 +1,15 @@
+export enum SortEnum {
+  DEFAULT = '',
+  RATING_DESC = '-rating',
+  PRICE_ASC = 'price',
+  PRICE_DESC = '-price',
+}
+
+export type Sort = {
+  name: string;
+  sortProperty: SortEnum;
+};
+
 export interface FilterSliceState {
   searchValue: string;
   inverterFilter: string[];
@@ -6,6 +18,7 @@ export interface FilterSliceState {
   areaFilter: string[];
   brandFilter: string[];
   countryFilter: string;
+  sort: Sort;
   page: number;
 }
 
@@ -17,5 +30,7 @@ export type FilterProductParams = {
   area: string;
   brand: string;
   country: string;
+  sortBy: string;
+  order: string;
   page: number;
 };

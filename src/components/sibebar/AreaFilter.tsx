@@ -12,7 +12,7 @@ const areas = [
   '100 м²',
 ];
 
-export const AreaFilter = () => {
+export const AreaFilter: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {

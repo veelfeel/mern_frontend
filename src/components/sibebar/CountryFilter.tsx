@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/store';
 
 const countries = ['Все страны', 'Турция', 'Китай', 'Франция', 'Италия'];
 
-export const CountryFilter = () => {
+export const CountryFilter: React.FC = () => {
   const dispatch = useAppDispatch();
   const valueCountry = useAppSelector((state) => state.filters.countryFilter);
 

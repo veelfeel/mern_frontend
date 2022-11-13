@@ -43,6 +43,7 @@ function App() {
     areaFilter,
     brandFilter,
     countryFilter,
+    sort,
     page,
   } = useAppSelector(selectFilters);
   const isAuth = useAppSelector(selectIsAuth);
@@ -55,6 +56,8 @@ function App() {
     const area = areaFilter.length > 0 ? `&area=${areaFilter.toString()}` : '';
     const brand = brandFilter.length > 0 ? `&brand=${brandFilter.toString()}` : '';
     const country = `&country=${countryFilter}`;
+    const sortBy = sort.sortProperty.replace('-', '');
+    const order = sort.sortProperty.includes('-') ? '-1' : '1';
 
     dispatch(
       fetchProducts({
@@ -65,6 +68,8 @@ function App() {
         area,
         brand,
         country,
+        sortBy,
+        order,
         page,
       }),
     );
@@ -80,6 +85,7 @@ function App() {
     areaFilter,
     brandFilter,
     countryFilter,
+    sort,
     page,
   ]);
 

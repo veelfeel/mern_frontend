@@ -9,9 +9,10 @@ export const fetchProducts = createAsyncThunk<
   { rejectValue: string }
 >('products/fetchProducts', async (params, { rejectWithValue }) => {
   try {
-    const { search, inverter, minPrice, maxPrice, area, brand, country, page } = params;
+    const { search, inverter, minPrice, maxPrice, area, brand, country, sortBy, order, page } =
+      params;
     const { data } = await axios.get(
-      `/api/products?page=${page}${inverter}${minPrice}${maxPrice}${area}${brand}${country}${search}`,
+      `/api/products?page=${page}${inverter}${minPrice}${maxPrice}${area}${brand}${country}&sortBy=${sortBy}&order=${order}${search}`,
     );
     // console.log(data);
     return data as ProductData;

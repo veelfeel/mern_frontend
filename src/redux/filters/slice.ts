@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { PriceFilter } from '../../components/sibebar/PriceFilter';
-import { FilterSliceState } from './types';
+import { FilterSliceState, Sort, SortEnum } from './types';
 
 const initialState: FilterSliceState = {
   searchValue: '',
@@ -10,6 +10,10 @@ const initialState: FilterSliceState = {
   areaFilter: [],
   brandFilter: [],
   countryFilter: 'Все страны',
+  sort: {
+    name: 'По умолчанию',
+    sortProperty: SortEnum.DEFAULT,
+  },
   page: 1,
 };
 
@@ -47,6 +51,9 @@ const filterSlice = createSlice({
     setCountryFilter(state, action: PayloadAction<string>) {
       state.countryFilter = action.payload;
     },
+    setSort(state, action: PayloadAction<Sort>) {
+      state.sort = action.payload;
+    },
     setCurrentPage(state, action: PayloadAction<number>) {
       state.page = action.payload;
     },
@@ -64,6 +71,7 @@ export const {
   setBrandFilterChecked,
   setBrandFilterUnchecked,
   setCountryFilter,
+  setSort,
   setCurrentPage,
 } = filterSlice.actions;
 
