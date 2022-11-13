@@ -1,9 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PriceFilter } from '../../components/sibebar/PriceFilter';
 import { FilterSliceState } from './types';
 
 const initialState: FilterSliceState = {
   searchValue: '',
   inverterFilter: [],
+  minPrice: '',
+  maxPrice: '',
   areaFilter: [],
   brandFilter: [],
   countryFilter: 'Все страны',
@@ -22,6 +25,14 @@ const filterSlice = createSlice({
     },
     setInverterFilterUnchecked(state, action: PayloadAction<string>) {
       state.inverterFilter = state.inverterFilter.filter((str) => str !== action.payload);
+    },
+    setMinPriceFilter(state, action: PayloadAction<string>) {
+      state.minPrice = action.payload;
+      console.log(state.minPrice, 'min');
+    },
+    setMaxPriceFilter(state, action: PayloadAction<string>) {
+      state.maxPrice = action.payload;
+      console.log(state.maxPrice, 'max');
     },
     setAreaFilterChecked(state, action: PayloadAction<string>) {
       state.areaFilter = [...state.areaFilter, action.payload];
@@ -48,6 +59,8 @@ export const {
   setSearchValue,
   setInverterFilterChecked,
   setInverterFilterUnchecked,
+  setMinPriceFilter,
+  setMaxPriceFilter,
   setAreaFilterChecked,
   setAreaFilterUnchecked,
   setBrandFilterChecked,

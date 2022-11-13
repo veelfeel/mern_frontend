@@ -2,20 +2,20 @@ import React from 'react';
 import { setBrandFilterChecked, setBrandFilterUnchecked } from '../../redux/filters/slice';
 import { useAppDispatch } from '../../redux/store';
 
-export const BrandFilter: React.FC = () => {
-  const [brands, setBrands] = React.useState<string[]>([
-    'Rovex',
-    'JAX',
-    'Ballu',
-    'Electrolux',
-    'Zanussi',
-    'Toshiba',
-    'Shuft',
-    'Denko',
-    'Centek',
-    'Lessar',
-  ]);
+const brands = [
+  'Rovex',
+  'JAX',
+  'Ballu',
+  'Electrolux',
+  'Zanussi',
+  'Toshiba',
+  'Shuft',
+  'Denko',
+  'Centek',
+  'Lessar',
+];
 
+export const BrandFilter: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {

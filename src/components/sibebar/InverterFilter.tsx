@@ -2,9 +2,9 @@ import React from 'react';
 import { setInverterFilterChecked, setInverterFilterUnchecked } from '../../redux/filters/slice';
 import { useAppDispatch } from '../../redux/store';
 
-export const InverterFilter: React.FC = () => {
-  const [inverter, setInverter] = React.useState<string[]>(['есть', 'нет']);
+const inverter = ['есть', 'нет'];
 
+export const InverterFilter: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {

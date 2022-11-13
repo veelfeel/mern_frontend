@@ -1,7 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-// import { getAuthFromLS } from '../../utils/localStorage';
+import { createSlice } from '@reduxjs/toolkit';
 import { fetchAuth, fetchAuthMe, fetchRegister } from './asyncThunk';
-import { AuthState, AuthData, Status, Auth } from './types';
+import { AuthState, Status } from './types';
 
 const initialState: AuthState = {
   data: null,

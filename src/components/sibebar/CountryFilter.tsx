@@ -2,15 +2,9 @@ import React from 'react';
 import { setCountryFilter } from '../../redux/filters/slice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 
-export const CountryFilter = () => {
-  const [countries, setCountries] = React.useState<string[]>([
-    'Все страны',
-    'Турция',
-    'Китай',
-    'Франция',
-    'Италия',
-  ]);
+const countries = ['Все страны', 'Турция', 'Китай', 'Франция', 'Италия'];
 
+export const CountryFilter = () => {
   const dispatch = useAppDispatch();
   const valueCountry = useAppSelector((state) => state.filters.countryFilter);
 

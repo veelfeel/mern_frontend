@@ -2,17 +2,17 @@ import React from 'react';
 import { setAreaFilterChecked, setAreaFilterUnchecked } from '../../redux/filters/slice';
 import { useAppDispatch } from '../../redux/store';
 
-export const AreaFilter = () => {
-  const [areas, setAreas] = React.useState<string[]>([
-    '15 м² - 20 м²',
-    '25 м² - 30 м²',
-    '30 м² - 40 м²',
-    '40 м² - 50 м²',
-    '60 м² - 70 м²',
-    '70 м² - 80 м²',
-    '100 м²',
-  ]);
+const areas = [
+  '15 м² - 20 м²',
+  '25 м² - 30 м²',
+  '30 м² - 40 м²',
+  '40 м² - 50 м²',
+  '60 м² - 70 м²',
+  '70 м² - 80 м²',
+  '100 м²',
+];
 
+export const AreaFilter = () => {
   const dispatch = useAppDispatch();
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,4 +1,6 @@
 import React from 'react';
+import { useAppDispatch } from '../../redux/store';
+import { setMaxPriceFilter, setMinPriceFilter } from '../../redux/filters/slice';
 import { addSpaces, removeSpaces } from '../../utils/normalizePrice';
 
 export const PriceFilter = () => {
@@ -16,26 +18,31 @@ export const PriceFilter = () => {
     right: `${100 - (Number(maxValueRange) / maxPrice) * 100}%`,
   };
 
+  const dispatch = useAppDispatch();
+
+  // input
   const changePriceMin = () => {
-    const value = Number(removeSpaces(minValueInput));
-    const newMinVal = Math.min(value, maxPrice);
+    const newMinVal = Math.min(Number(removeSpaces(minValueInput)), maxPrice);
+    const newMaxVal = Math.max(newMinVal, Number(removeSpaces(maxValueInput)));
+
     setMinValueInput(addSpaces(String(newMinVal)));
     setMinValueRange(String(newMinVal));
+    dispatch(setMinPriceFilter(String(newMinVal)));
 
-    const newMaxVal = Math.max(newMinVal, Number(removeSpaces(maxValueInput)));
-    setMaxValueInput(addSpaces(String(newMaxVal)));
-    setMaxValueRange(String(newMaxVal));
+    if (Number(removeSpaces(minValueInput)) > Number(removeSpaces(maxValueInput))) {
+      setMaxValueInput(addSpaces(String(newMaxVal)));
+      setMaxValueRange(String(newMaxVal));
+      dispatch(setMaxPriceFilter(String(newMaxVal)));
+    }
   };
 
   const changePriceMax = () => {
-    const value = Number(removeSpaces(maxValueInput));
-    const newMinVal = Math.min(value, maxPrice);
-    setMaxValueInput(addSpaces(String(newMinVal)));
-    setMaxValueRange(String(newMinVal));
-
+    const newMinVal = Math.min(Number(removeSpaces(maxValueInput)), maxPrice);
     const newMaxVal = Math.max(newMinVal, Number(removeSpaces(minValueInput)));
+
     setMaxValueInput(addSpaces(String(newMaxVal)));
     setMaxValueRange(String(newMaxVal));
+    dispatch(setMaxPriceFilter(String(newMaxVal)));
   };
 
   const onBlurMin = () => {
@@ -66,16 +73,23 @@ export const PriceFilter = () => {
     setMaxValueInput(addSpaces(event.target.value));
   };
 
+  // range
+  const onMouseUpMinRange = () => {
+    dispatch(setMinPriceFilter(removeSpaces(minValueInput)));
+  };
+
+  const onMouseUpMaxRange = () => {
+    dispatch(setMaxPriceFilter(removeSpaces(maxValueInput)));
+  };
+
   const onChangeMinRange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value);
-    const newMinVal = Math.min(value, Number(maxValueRange));
+    const newMinVal = Math.min(Number(event.target.value), Number(maxValueRange));
     setMinValueRange(String(newMinVal));
     setMinValueInput(addSpaces(String(newMinVal)));
   };
 
   const onChangeMaxRange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value);
-    const newMaxVal = Math.max(value, Number(minValueRange));
+    const newMaxVal = Math.max(Number(event.target.value), Number(minValueRange));
     setMaxValueRange(String(newMaxVal));
     setMaxValueInput(addSpaces(String(newMaxVal)));
   };
@@ -126,6 +140,7 @@ export const PriceFilter = () => {
           <input
             value={minValueRange}
             onChange={onChangeMinRange}
+            onMouseUp={onMouseUpMinRange}
             min={minPrice}
             max={maxPrice}
             step={100}
@@ -134,6 +149,7 @@ export const PriceFilter = () => {
           <input
             value={maxValueRange}
             onChange={onChangeMaxRange}
+            onMouseUp={onMouseUpMaxRange}
             min={minPrice}
             max={maxPrice}
             step={100}
