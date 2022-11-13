@@ -15,7 +15,7 @@ export const Pagination = () => {
 
   return (
     <div className="pagination">
-      {totalPages > 0 &&
+      {totalPages > 1 &&
         [...Array(totalPages)].map((val, index) => (
           <button
             key={index}

@@ -4,44 +4,47 @@ import { setMaxPriceFilter, setMinPriceFilter } from '../../redux/filters/slice'
 import { addSpaces, removeSpaces } from '../../utils/normalizePrice';
 
 export const PriceFilter = () => {
-  const minPrice = 0;
-  const maxPrice = 120000;
+  const minPrice = '0';
+  const maxPrice = '120000';
 
-  const [minValueInput, setMinValueInput] = React.useState<string>(addSpaces(String(minPrice)));
-  const [maxValueInput, setMaxValueInput] = React.useState<string>(addSpaces(String(maxPrice)));
+  const [minValueInput, setMinValueInput] = React.useState<string>(minPrice);
+  const [maxValueInput, setMaxValueInput] = React.useState<string>(maxPrice);
 
-  const [minValueRange, setMinValueRange] = React.useState<string>(String(minPrice));
-  const [maxValueRange, setMaxValueRange] = React.useState<string>(String(maxPrice));
+  const [minValueRange, setMinValueRange] = React.useState<string>(minPrice);
+  const [maxValueRange, setMaxValueRange] = React.useState<string>(maxPrice);
 
   const styles = {
-    left: `${(Number(minValueRange) / maxPrice) * 100}%`,
-    right: `${100 - (Number(maxValueRange) / maxPrice) * 100}%`,
+    left: `${(Number(minValueRange) / Number(maxPrice)) * 100}%`,
+    right: `${100 - (Number(maxValueRange) / Number(maxPrice)) * 100}%`,
   };
 
   const dispatch = useAppDispatch();
 
   // input
   const changePriceMin = () => {
-    const newMinVal = Math.min(Number(removeSpaces(minValueInput)), maxPrice);
-    const newMaxVal = Math.max(newMinVal, Number(removeSpaces(maxValueInput)));
+    const newMinVal = Math.min(removeSpaces(minValueInput), Number(maxPrice));
+    const newMaxVal = Math.max(newMinVal, removeSpaces(maxValueInput));
 
-    setMinValueInput(addSpaces(String(newMinVal)));
+    setMinValueInput(addSpaces(newMinVal));
     setMinValueRange(String(newMinVal));
+
     dispatch(setMinPriceFilter(String(newMinVal)));
 
-    if (Number(removeSpaces(minValueInput)) > Number(removeSpaces(maxValueInput))) {
-      setMaxValueInput(addSpaces(String(newMaxVal)));
+    if (removeSpaces(minValueInput) > removeSpaces(maxValueInput)) {
+      setMaxValueInput(addSpaces(newMaxVal));
       setMaxValueRange(String(newMaxVal));
+
       dispatch(setMaxPriceFilter(String(newMaxVal)));
     }
   };
 
   const changePriceMax = () => {
-    const newMinVal = Math.min(Number(removeSpaces(maxValueInput)), maxPrice);
-    const newMaxVal = Math.max(newMinVal, Number(removeSpaces(minValueInput)));
+    const newMinVal = Math.min(removeSpaces(maxValueInput), Number(maxPrice));
+    const newMaxVal = Math.max(newMinVal, removeSpaces(minValueInput));
 
-    setMaxValueInput(addSpaces(String(newMaxVal)));
+    setMaxValueInput(addSpaces(newMaxVal));
     setMaxValueRange(String(newMaxVal));
+
     dispatch(setMaxPriceFilter(String(newMaxVal)));
   };
 
@@ -75,23 +78,23 @@ export const PriceFilter = () => {
 
   // range
   const onMouseUpMinRange = () => {
-    dispatch(setMinPriceFilter(removeSpaces(minValueInput)));
+    dispatch(setMinPriceFilter(String(removeSpaces(minValueInput))));
   };
 
   const onMouseUpMaxRange = () => {
-    dispatch(setMaxPriceFilter(removeSpaces(maxValueInput)));
+    dispatch(setMaxPriceFilter(String(removeSpaces(maxValueInput))));
   };
 
   const onChangeMinRange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newMinVal = Math.min(Number(event.target.value), Number(maxValueRange));
     setMinValueRange(String(newMinVal));
-    setMinValueInput(addSpaces(String(newMinVal)));
+    setMinValueInput(addSpaces(newMinVal));
   };
 
   const onChangeMaxRange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newMaxVal = Math.max(Number(event.target.value), Number(minValueRange));
     setMaxValueRange(String(newMaxVal));
-    setMaxValueInput(addSpaces(String(newMaxVal)));
+    setMaxValueInput(addSpaces(newMaxVal));
   };
 
   return (
@@ -115,7 +118,7 @@ export const PriceFilter = () => {
               onKeyDown={onKeyDownMin}
               min={minPrice}
               max={maxPrice}
-              placeholder={addSpaces(String(minPrice))}
+              placeholder={addSpaces(minPrice)}
             />
             <span className="price-reset none"> </span>
           </div>
@@ -130,7 +133,7 @@ export const PriceFilter = () => {
               onKeyDown={onKeyDownMax}
               min={minPrice}
               max={maxPrice}
-              placeholder={addSpaces(String(maxPrice))}
+              placeholder={addSpaces(maxPrice)}
             />
             <span className="price-reset none"> </span>
           </div>

@@ -1,8 +1,8 @@
 export interface FilterSliceState {
   searchValue: string;
   inverterFilter: string[];
-  minPrice: string;
-  maxPrice: string;
+  minPriceFilter: string;
+  maxPriceFilter: string;
   areaFilter: string[];
   brandFilter: string[];
   countryFilter: string;
@@ -12,6 +12,8 @@ export interface FilterSliceState {
 export type FilterProductParams = {
   search: string;
   inverter: string;
+  minPrice: string;
+  maxPrice: string;
   area: string;
   brand: string;
   country: string;

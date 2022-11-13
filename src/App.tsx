@@ -35,21 +35,33 @@ const NotFound = React.lazy(() => import(/* webpackChunkName: 'NotFound' */ './p
 
 function App() {
   const dispatch = useAppDispatch();
-  const { searchValue, inverterFilter, areaFilter, brandFilter, countryFilter, page } =
-    useAppSelector(selectFilters);
+  const {
+    searchValue,
+    inverterFilter,
+    minPriceFilter,
+    maxPriceFilter,
+    areaFilter,
+    brandFilter,
+    countryFilter,
+    page,
+  } = useAppSelector(selectFilters);
   const isAuth = useAppSelector(selectIsAuth);
 
   const getProducts = async () => {
     const search = searchValue ? `&search=${searchValue}` : '';
     const inverter = inverterFilter.length > 0 ? `&inverter=${inverterFilter.toString()}` : '';
-    const area = areaFilter.length > 0 ? `&area=${areaFilter.join()}` : '';
-    const brand = brandFilter.length > 0 ? `&brand=${brandFilter.join()}` : '';
+    const minPrice = minPriceFilter ? `&minPrice=${minPriceFilter}` : '';
+    const maxPrice = maxPriceFilter ? `&maxPrice=${maxPriceFilter}` : '';
+    const area = areaFilter.length > 0 ? `&area=${areaFilter.toString()}` : '';
+    const brand = brandFilter.length > 0 ? `&brand=${brandFilter.toString()}` : '';
     const country = `&country=${countryFilter}`;
 
     dispatch(
       fetchProducts({
         search,
         inverter,
+        minPrice,
+        maxPrice,
         area,
         brand,
         country,
@@ -60,7 +72,16 @@ function App() {
 
   React.useEffect(() => {
     getProducts();
-  }, [searchValue, inverterFilter, areaFilter, brandFilter, countryFilter, page]);
+  }, [
+    searchValue,
+    inverterFilter,
+    minPriceFilter,
+    maxPriceFilter,
+    areaFilter,
+    brandFilter,
+    countryFilter,
+    page,
+  ]);
 
   React.useEffect(() => {
     dispatch(fetchAuthMe());
