@@ -61,6 +61,7 @@ function App() {
 
     dispatch(
       fetchProducts({
+        page,
         search,
         inverter,
         minPrice,
@@ -70,7 +71,6 @@ function App() {
         country,
         sortBy,
         order,
-        page,
       }),
     );
   };
@@ -78,6 +78,7 @@ function App() {
   React.useEffect(() => {
     getProducts();
   }, [
+    page,
     searchValue,
     inverterFilter,
     minPriceFilter,
@@ -85,8 +86,7 @@ function App() {
     areaFilter,
     brandFilter,
     countryFilter,
-    sort,
-    page,
+    sort.sortProperty,
   ]);
 
   React.useEffect(() => {

@@ -7,6 +7,7 @@ export const Pagination = () => {
   const dispatch = useAppDispatch();
   const { total, limit } = useAppSelector(selectProducts);
   const page = useAppSelector((state) => state.filters.page);
+
   const totalPages = Math.ceil(total / limit);
 
   const onClick = (index: number) => {
@@ -14,9 +15,10 @@ export const Pagination = () => {
   };
 
   return (
-    <div className="pagination">
-      {totalPages > 1 &&
-        [...Array(totalPages)].map((val, index) => (
+    <>
+      <button className="more-products-btn">Показать ещё</button>
+      <div className="pagination">
+        {[...Array(totalPages)].map((val, index) => (
           <button
             key={index}
             onClick={() => onClick(index)}
@@ -28,6 +30,7 @@ export const Pagination = () => {
             {index + 1}
           </button>
         ))}
-    </div>
+      </div>
+    </>
   );
 };

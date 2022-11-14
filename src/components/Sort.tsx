@@ -13,8 +13,7 @@ type PopupClick = MouseEvent & {
 };
 
 const sortNames: SortItem[] = [
-  { name: 'По умолчанию', sortProperty: SortEnum.DEFAULT },
-  { name: 'Сначала популярные', sortProperty: SortEnum.RATING_DESC },
+  { name: 'По популярности', sortProperty: SortEnum.RATING_DESC },
   { name: 'Сначала недорогие', sortProperty: SortEnum.PRICE_ASC },
   { name: 'Сначала дорогие', sortProperty: SortEnum.PRICE_DESC },
 ];

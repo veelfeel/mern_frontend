@@ -1,5 +1,4 @@
 export enum SortEnum {
-  DEFAULT = '',
   RATING_DESC = '-rating',
   PRICE_ASC = 'price',
   PRICE_DESC = '-price',

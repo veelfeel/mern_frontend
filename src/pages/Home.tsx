@@ -8,16 +8,16 @@ import {
   ContactOfPromo,
   CarouselOfPromo,
   TimerOfPromo,
-  MoreButton,
+  Pagination,
   Sort,
   Loader,
   ProductBlock,
   Sidebar,
 } from '../components';
-import { Pagination } from '../components/Pagination';
 
 const Home: React.FC = () => {
-  const { products, status, total } = useAppSelector(selectProducts);
+  const { products, status, total, limit } = useAppSelector(selectProducts);
+  const totalPages = Math.ceil(total / limit);
 
   const productBlocks = products.map((obj: Product) => <ProductBlock key={obj._id} {...obj} />);
 
@@ -55,12 +55,16 @@ const Home: React.FC = () => {
                 </div>
               ) : status === 'loading' ? (
                 <Loader className={'product-block'} />
+              ) : total === 0 ? (
+                <div className="product-not-found">
+                  <h2>Товары не найдены 😕</h2>
+                  <p>Попробуйте изменить параметры фильрации или поиска.</p>
+                </div>
               ) : (
                 productBlocks
               )}
             </div>
-            <MoreButton />
-            <Pagination />
+            {totalPages > 1 && <Pagination />}
           </div>
         </div>
       </div>

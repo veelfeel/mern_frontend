@@ -8,7 +8,7 @@ export * from './CartEmpty';
 export * from './CartTotalDetails';
 export * from './ContactOfPromo';
 export * from './Loader';
-export * from './MoreButton';
+export * from './Pagination';
 export * from './Order';
 export * from './Sort';
 export * from './ProductBlock';

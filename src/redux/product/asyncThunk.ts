@@ -11,8 +11,9 @@ export const fetchProducts = createAsyncThunk<
   try {
     const { search, inverter, minPrice, maxPrice, area, brand, country, sortBy, order, page } =
       params;
+
     const { data } = await axios.get(
-      `/api/products?page=${page}${inverter}${minPrice}${maxPrice}${area}${brand}${country}&sortBy=${sortBy}&order=${order}${search}`,
+      `/api/products?page=${page}${search}${inverter}${minPrice}${maxPrice}${area}${brand}${country}&sortBy=${sortBy}&order=${order}`,
     );
     // console.log(data);
     return data as ProductData;

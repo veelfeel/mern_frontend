@@ -1,0 +1,44 @@
+.more-products-btn {
+  margin-bottom: 20px;
+  height: 3rem;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px #00000012;
+  background-color: white;
+}
+
+.more-products-btn:hover {
+  box-shadow: 0px 3px 5px #00000017;
+  background-color: #f9f9f9;
+}
+
+.pagination {
+  display: flex;
+
+  &-button {
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    scale: 0.95;
+    border: 1px solid #639;
+    width: 50px;
+    font-weight: 900;
+    background-color: white;
+    color: #639;
+    display: inline-flex;
+    justify-content: center;
+
+    &:not(:last-child) {
+      margin-right: 4px;
+    }
+
+    &:active {
+      scale: 1;
+    }
+
+    &--active {
+      background-color: #639;
+      color: white;
+    }
+  }
+}
