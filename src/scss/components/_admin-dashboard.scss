@@ -16,19 +16,18 @@
     display: flex;
     flex-direction: column;
     background-color: rgba(41, 52, 120, 0.53);
-    padding: 10px;
+    padding: 26px;
   }
 
   &__link {
     padding: 12px;
     transition: $transition;
     color: white;
-    border-left: 0px solid #9b0097;
 
     &--active {
       padding: 12px;
       transition: $transition;
-      border-left: 4px solid #9b0097;
+      border-left: 2px solid #ffdefe;
     }
   }
 

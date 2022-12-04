@@ -18,6 +18,7 @@
 @import 'components/register-screen';
 @import 'components/profile-screen';
 @import 'components/admin-dashboard';
+@import 'components/admin-wellcome';
 @import 'components/admin-products';
 @import 'components/admin-product-block';
 @import 'components/admin-add-product';
@@ -200,7 +201,7 @@ input[type='number']::-webkit-inner-spin-button {
     width: 340px;
     padding: 10px 10px 10px 42px;
     border-radius: 6px;
-    border: 1px solid #fff479;
+    border: 2px solid #9b9b9b;
   }
 
   & .svg-search {

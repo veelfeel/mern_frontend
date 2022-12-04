@@ -1,9 +1,6 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 
-import { selectIsAuth } from '../redux/auth/selectors';
-import { useAppSelector } from '../redux/store';
-
 const Dashboard = () => {
   return (
     <div className="admin-dashboard">

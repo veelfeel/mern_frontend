@@ -9,7 +9,7 @@ import { ErrorLoading } from './ErrorLoading';
 import { ProductBlock } from './ProductBlock';
 
 export const ProductList: React.FC = () => {
-  const { products, status } = useAppSelector(selectProducts);
+  const { products, status, total } = useAppSelector(selectProducts);
   const productBlocks = products.map((obj: Product) => <ProductBlock key={obj._id} {...obj} />);
 
   return (
@@ -29,7 +29,12 @@ export const ProductList: React.FC = () => {
         <Loader className={'admin-product-block'} />
       ) : status === 'error' ? (
         <ErrorLoading />
-      ) : (
+      ) : total === 0 ?
+      (<div className="product-not-found">
+                  <h2>Товары не найдены 😕</h2>
+                  <p>Попробуйте изменить параметры поиска</p>
+                </div>)
+      : (
         <table>
           <tbody>{productBlocks}</tbody>
         </table>

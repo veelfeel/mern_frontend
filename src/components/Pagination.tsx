@@ -12,6 +12,8 @@ export const Pagination = () => {
 
   const onClick = (index: number) => {
     dispatch(setCurrentPage(index + 1));
+
+    window.scrollTo(0, 0);
   };
 
   return (

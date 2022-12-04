@@ -11,18 +11,14 @@
   }
 
   & table {
-    margin-bottom: 26px;
     width: 100%;
     border: 1px solid #e7e7e7;
-    border-collapse: collapse;
     table-layout: fixed;
 
     & thead {
       & th {
-        border: 1px solid #ffffad;
         padding: 12px;
         font-weight: 500;
-        background-color: #ffffad;
       }
     }
 

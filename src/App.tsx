@@ -16,6 +16,7 @@ import Register from './pages/Register';
 import Signin from './pages/Signin';
 import Profile from './pages/Profile';
 import Dashboard from './pages/Dashboard';
+import WellcomeToDashboard from './components/admin/WellcomeToDashboard';
 import Products from './components/admin/Products';
 import AddProduct from './components/admin/AddProduct';
 import Users from './components/admin/Users';
@@ -125,6 +126,7 @@ function App() {
         <Route path="signin" element={<Signin />} />
         <Route path="profile" element={<Profile />} />
         <Route path="admin" element={<Dashboard />}>
+          <Route path="" element={<WellcomeToDashboard />} />
           <Route path="products" element={<Products />} />
           <Route path="products/add-product" element={<AddProduct />} />
           <Route path="users" element={<Users />} />

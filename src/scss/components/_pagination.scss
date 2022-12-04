@@ -20,11 +20,11 @@
     border-radius: 10px;
     font-size: 14px;
     scale: 0.95;
-    border: 1px solid #639;
+    border: 1px solid #666;
     width: 50px;
     font-weight: 900;
     background-color: white;
-    color: #639;
+    color: #666;
     display: inline-flex;
     justify-content: center;
 
@@ -37,7 +37,8 @@
     }
 
     &--active {
-      background-color: #639;
+      border-color: $primary;
+      background-color: $primary;
       color: white;
     }
   }
