@@ -51,7 +51,6 @@ header.sticky {
 
 .location-text {
   color: white;
-  font-weight: 600;
   transition: 0.1s;
 }
 
@@ -191,7 +190,7 @@ header .menu.active {
 
 .logo-text {
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .logo-text2 {
@@ -506,11 +505,15 @@ header .menu.active {
   color: #ff5f00;
 }
 
-.header__cart-link:hover .header__button-group.header__cart-group--color .header__cart-image {
+.header__cart-link:hover
+  .header__button-group.header__cart-group--color
+  .header__cart-image {
   stroke: white;
 }
 
-.header__cart-link:hover .header__button-group.header__cart-group--color .header__cart-link-text {
+.header__cart-link:hover
+  .header__button-group.header__cart-group--color
+  .header__cart-link-text {
   color: white;
 }
 

@@ -1,0 +1,26 @@
+.input-search {
+  position: relative;
+
+  & input {
+    width: 340px;
+    padding: 10px 10px 10px 42px;
+    border-radius: 6px;
+    border: 2px solid #f3f3f3;
+    background-color: #f3f3f3;
+
+    &:focus {
+      border-color: #d2d2d2;
+      background-color: transparent;
+    }
+  }
+
+  & .svg-search {
+    width: 18px;
+    height: 18px;
+    opacity: 0.3;
+    left: 14px;
+    top: 9px;
+    pointer-events: none;
+    position: absolute;
+  }
+}

@@ -1,9 +1,11 @@
-import React from 'react';
+import React from "react";
 
 const WellcomeToDashboard: React.FC = () => {
   return (
-    <div className='admin-wellcome'>
-      <div className='admin-wellcome__text'>Добро пожаловать в панель управления</div>
+    <div className="admin-wellcome">
+      <h1 className="admin-wellcome__text">
+        Добро пожаловать в панель управления
+      </h1>
     </div>
   );
 };

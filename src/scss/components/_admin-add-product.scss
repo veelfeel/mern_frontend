@@ -1,3 +1,5 @@
 .admin-add-product {
-  color: red;
+  & h1 {
+    font-size: 22px;
+  }
 }
