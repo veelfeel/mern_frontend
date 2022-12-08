@@ -1,5 +1,87 @@
 .admin-add-product {
+  width: 400px;
+  position: relative;
+
+  &__header {
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+
+    & svg {
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  }
+
   & h1 {
-    font-size: 22px;
+    font-size: 20px;
+  }
+
+  & h2 {
+    font-size: 18px;
+  }
+
+  & input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #828282;
+    border-radius: $radius;
+
+    &:focus {
+      border-color: #a2b8ff75;
+      outline: 3px solid #a2b8ff75;
+      box-shadow: 0 0px 0px 3px #a2b8ff61;
+    }
+  }
+
+  & .input-selection {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #828282;
+    border-radius: $radius;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    & span {
+      margin-right: 6px;
+    }
+
+    &-list {
+      visibility: hidden;
+      opacity: 0;
+      margin-top: -2px;
+      width: 100%;
+      border-radius: $radius;
+      background-color: white;
+      box-shadow: 0 0 2px 2px #ddd;
+      cursor: pointer;
+      position: absolute;
+      transition: 0.3s ease;
+    }
+
+    &-list--active {
+      visibility: visible;
+      opacity: 1;
+      margin-top: 0;
+      transition: 0.3s ease;
+    }
+
+    &-item {
+      padding: 10px;
+
+      &:hover {
+        font-weight: 600;
+      }
+
+      &:not(:last-child) {
+        border-bottom: 1px solid #cdcdcd;
+      }
+    }
+  }
+
+  & .admin-button {
+    margin-top: 20px;
   }
 }

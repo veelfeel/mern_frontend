@@ -1,12 +1,12 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
-import { useAppSelector } from '../../redux/store';
-import { selectIsAuth } from '../../redux/auth/selectors';
+import { useAppSelector } from "../../redux/store";
+import { selectIsAuth } from "../../redux/auth/selectors";
 
-import { Search } from '../Search';
-import { CartLink } from './CartLink';
-import { LogoutButton } from './LogoutButton';
+import { Search } from "../Search";
+import { CartLink } from "./CartLink";
+import { LogoutButton } from "./LogoutButton";
 
 export const Header: React.FC = () => {
   const location = useLocation();
@@ -51,7 +51,7 @@ export const Header: React.FC = () => {
             </div>
             <div className="header-info-mobile">
               <a href="tel:+79881482838">
-                <img src="../images/icons/phone.svg" alt="phone" />
+                <img src="/images/icons/phone.svg" alt="phone" />
               </a>
             </div>
           </div>
@@ -68,11 +68,13 @@ export const Header: React.FC = () => {
                 </div>
               </Link>
             </div>
-            {location.pathname === '/' && <Search placeholder={'Поиск по сайту...'} />}
+            {location.pathname === "/" && (
+              <Search placeholder={"Поиск по сайту..."} />
+            )}
             <div className="header__right-links">
-              {location.pathname.startsWith('/profile') ||
-              location.pathname.startsWith('/admin') ? (
-                ''
+              {location.pathname.startsWith("/profile") ||
+              location.pathname.startsWith("/admin") ? (
+                ""
               ) : (
                 <Link to="/favourites">
                   <svg className="header__favourites-image" viewBox="0 0 44 39">
@@ -84,21 +86,29 @@ export const Header: React.FC = () => {
                   <span>Избранное</span>
                 </Link>
               )}
-              <Link to={isAuth && !isAdmin ? '/profile' : isAuth && isAdmin ? '/admin' : '/signin'}>
+              <Link
+                to={
+                  isAuth && !isAdmin
+                    ? "/profile"
+                    : isAuth && isAdmin
+                    ? "/admin"
+                    : "/signin"
+                }
+              >
                 <svg className="header__signin-image" viewBox="0 0 66 63">
                   <circle cx="33" cy="20" r="19" />
                   <path d="M1 62V62C14.778 36.5886 51.574 36.4008 65 62V62" />
                 </svg>
-                <span>{isAuth ? name : 'Войти'}</span>
+                <span>{isAuth ? name : "Войти"}</span>
               </Link>
-              {location.pathname.startsWith('/profile') ||
-              location.pathname.startsWith('/admin') ? (
+              {location.pathname.startsWith("/profile") ||
+              location.pathname.startsWith("/admin") ? (
                 <LogoutButton />
               ) : (
-                ''
+                ""
               )}
-              {location.pathname.startsWith('/profile') ||
-                (location.pathname.startsWith('/admin') ? '' : <CartLink />)}
+              {location.pathname.startsWith("/profile") ||
+                (location.pathname.startsWith("/admin") ? "" : <CartLink />)}
             </div>
           </div>
         </div>

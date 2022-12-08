@@ -1,13 +1,13 @@
-import React from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import React from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
-import { useAppDispatch } from '../redux/store';
-import { addCartItem } from '../redux/cart/slice';
+import { useAppDispatch } from "../redux/store";
+import { addCartItem } from "../redux/cart/slice";
 
-import axios from '../axios';
+import axios from "../axios";
 
-import { CardRating, AddFavouritesButton, Loader } from '../components';
-import { CartItem } from '../redux/cart/types';
+import { CardRating, AddFavouritesButton, Loader } from "../components";
+import { CartItem } from "../redux/cart/types";
 
 const Product: React.FC = () => {
   const [product, setProduct] = React.useState<{
@@ -48,8 +48,8 @@ const Product: React.FC = () => {
         const { data } = await axios.get(`/api/products/${id}`);
         setProduct(data);
       } catch (error) {
-        alert('Ошибка при получении товара');
-        navigate('/');
+        alert("Ошибка при получении товара");
+        navigate("/");
       }
     }
 
@@ -82,7 +82,11 @@ const Product: React.FC = () => {
             </div>
             <span>Вернуться назад</span>
           </Link>
-          <img src={product.imageUrl} alt={product.title} className="product-screen__img" />
+          <img
+            src={product.imageUrl}
+            alt={product.title}
+            className="product-screen__img"
+          />
           <h3 className="product-screen__title">{product.title}</h3>
           <CardRating />
           <div className="product-screen__text">
@@ -164,17 +168,25 @@ const Product: React.FC = () => {
           </div>
           <div className="product-screen__right-content">
             <div className="product-screen__price">
-              <span className="product-screen__price__number">{product.price}</span>
+              <span className="product-screen__price__number">
+                {product.price}
+              </span>
               <span className="product-screen__price__symbol"> ₽</span>
             </div>
             <AddFavouritesButton />
-            <button onClick={onClickAdd} className="product-screen-button button-primary">
+            <button
+              onClick={onClickAdd}
+              className="product-screen-button button-primary"
+            >
               Купить
             </button>
             <span className="product-block__count-in-stock">
               В наличии: {product.countInStock} шт.
             </span>
-            <span className="product-block__delivery"> Бесплатная доставка</span>
+            <span className="product-block__delivery">
+              {" "}
+              Бесплатная доставка
+            </span>
           </div>
         </div>
         <div className="product-screen__text-title product-screen__text-title--padding-top">
