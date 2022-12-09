@@ -36,8 +36,10 @@
 
         & td {
           height: 115px;
-          // border: 1px solid #e7e7e7;
-          // text-align: center;
+          & a {
+            margin-bottom: 20px;
+            text-align: center;
+          }
         }
       }
     }

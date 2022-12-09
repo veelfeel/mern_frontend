@@ -1,9 +1,84 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import axios from "../../axios";
+
 import { InverterSelect } from "../../components/admin/InverterSelect";
+import { AreaSelect } from "../../components/admin/AreaSelect";
+import { BrandSelect } from "../../components/admin/BrandSelect";
+import { CountrySelect } from "../../components/admin/CountrySelect";
+import { RatingSelect } from "../../components/admin/RatingSelect";
 
 const AddProduct: React.FC = () => {
-  const [value, setValue] = React.useState("есть");
+  const { id } = useParams();
+  const isEditing = Boolean(id);
+
+  const navigate = useNavigate();
+
+  const [title, setTitle] = React.useState("");
+  const [inverter, setInverter] = React.useState("есть");
+  const [area, setArea] = React.useState("25 м² - 30 м²");
+  const [brand, setBrand] = React.useState("Toshiba");
+  const [country, setCountry] = React.useState("Китай");
+  const [price, setPrice] = React.useState("");
+  const [imageUrl, setImageUrl] = React.useState(
+    "https://via.placeholder.com/600/d32776"
+  );
+  const [rating, setRating] = React.useState("7");
+
+  const addProduct = async () => {
+    try {
+      if (Boolean(title) && Boolean(price)) {
+        const fields = {
+          title,
+          inverter,
+          area,
+          brand,
+          country,
+          price: Number(price),
+          imageUrl,
+          rating,
+        };
+
+        if (isEditing) {
+          await axios.patch(`/api/products/${id}`, fields);
+          console.log("update success");
+        } else {
+          await axios.post("/api/products", fields);
+          console.log("create success");
+        }
+
+        navigate("/admin/products");
+      } else {
+        console.log("validation message");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    async function getProduct() {
+      try {
+        const { data } = await axios.get(`/api/products/${id}`);
+        setTitle(data.title);
+        setInverter(data.inverter);
+        setArea(data.area);
+        setBrand(data.brand);
+        setCountry(data.country);
+        setPrice(data.price);
+        setImageUrl(data.imageUrl);
+        setRating(data.rating);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    if (id) {
+      getProduct();
+    }
+  }, []);
+
+  console.log(title);
 
   return (
     <div className="admin-add-product">
@@ -30,24 +105,32 @@ const AddProduct: React.FC = () => {
             />
           </svg>
         </Link>
-        <h1>Добавить товар</h1>
+        <h1>{isEditing ? "Редактировать товар" : "Добавить товар"}</h1>
       </div>
       <h2>Название</h2>
-      <input placeholder="Введите название" type="text" />
-      <InverterSelect value={value} />
-      <h2>Площадь помещения</h2>
-      <input placeholder="25 м² - 30 м²" type="text" />
-      <h2>Бренд</h2>
-      <input placeholder="Например, Haier" type="text" />
-      <h2>Страна-производитель</h2>
-      <input placeholder="Например, Вьетнам" type="text" />
+      <input
+        onChange={(e) => setTitle(e.target.value)}
+        value={title}
+        placeholder="Введите название"
+        type="text"
+      />
+      <InverterSelect setInverter={setInverter} inverter={inverter} />
+      <AreaSelect setArea={setArea} area={area} />
+      <BrandSelect setBrand={setBrand} brand={brand} />
+      <CountrySelect setCountry={setCountry} country={country} />
       <h2>Цена</h2>
-      <input placeholder="22 000" type="text" />
+      <input
+        onChange={(e) => setPrice(e.target.value)}
+        value={price}
+        placeholder="22 000"
+        type="text"
+      />
       <h2>Изображения</h2>
       <input type="file" />
-      <h2>Рейтинг</h2>
-      <input placeholder="От 1 до 10" type="text" />
-      <button className="admin-button">Сохранить</button>
+      <RatingSelect setRating={setRating} rating={rating} />
+      <button onClick={addProduct} className="admin-button">
+        {isEditing ? "Сохранить" : "Создать товар"}
+      </button>
     </div>
   );
 };

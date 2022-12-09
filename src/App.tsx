@@ -19,7 +19,7 @@ import Dashboard from "./pages/Dashboard";
 import AddProduct from "./pages/admin/AddProduct";
 
 import WellcomeToDashboard from "./components/admin/WellcomeToDashboard";
-import Products from "./components/admin/Products";
+import Products from "./pages/admin/Products";
 import Users from "./components/admin/Users";
 
 // const Favourites = Loadable({
@@ -136,6 +136,7 @@ function App() {
           <Route path="" element={<WellcomeToDashboard />} />
           <Route path="products" element={<Products />} />
           <Route path="products/add-product" element={<AddProduct />} />
+          <Route path="products/edit/:id" element={<AddProduct />} />
           <Route path="users" element={<Users />} />
         </Route>
         <Route

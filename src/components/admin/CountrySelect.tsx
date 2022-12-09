@@ -1,23 +1,33 @@
 import React from "react";
-
-const inverterNames = ["есть", "нет"];
+import axios from "../../axios";
 
 type PopupClick = MouseEvent & {
   path: Node[];
 };
 
 type PropType = {
-  setInverter: React.Dispatch<React.SetStateAction<string>>;
-  inverter: string;
+  setCountry: React.Dispatch<React.SetStateAction<string>>;
+  country: string;
 };
 
-export const InverterSelect: React.FC<PropType> = ({
-  setInverter,
-  inverter,
-}) => {
+export const CountrySelect: React.FC<PropType> = ({ setCountry, country }) => {
+  const [countryArray, setCountryArray] = React.useState([]);
   const [open, setOpen] = React.useState(false);
 
   const divRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    async function getAreas() {
+      try {
+        const { data } = await axios.get("/api/countries");
+        setCountryArray(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    getAreas();
+  }, []);
 
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -35,13 +45,13 @@ export const InverterSelect: React.FC<PropType> = ({
 
   return (
     <>
-      <h2>Инверторная технология</h2>
+      <h2>Страна-производитель</h2>
       <div
         ref={divRef}
         onClick={() => setOpen(!open)}
         className="input-selection"
       >
-        <span>{inverter}</span>
+        <span>{country}</span>
         <svg
           width="13"
           height="13"
@@ -61,10 +71,10 @@ export const InverterSelect: React.FC<PropType> = ({
               : "input-selection-list"
           }
         >
-          {inverterNames.map((x) => (
+          {countryArray.map((x) => (
             <li
               key={x}
-              onClick={() => setInverter(x)}
+              onClick={() => setCountry(x)}
               className="input-selection-item"
             >
               {x}

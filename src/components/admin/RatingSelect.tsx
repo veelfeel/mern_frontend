@@ -1,20 +1,17 @@
 import React from "react";
 
-const inverterNames = ["есть", "нет"];
+const ratingNames = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
 
 type PopupClick = MouseEvent & {
   path: Node[];
 };
 
 type PropType = {
-  setInverter: React.Dispatch<React.SetStateAction<string>>;
-  inverter: string;
+  setRating: React.Dispatch<React.SetStateAction<string>>;
+  rating: string;
 };
 
-export const InverterSelect: React.FC<PropType> = ({
-  setInverter,
-  inverter,
-}) => {
+export const RatingSelect: React.FC<PropType> = ({ setRating, rating }) => {
   const [open, setOpen] = React.useState(false);
 
   const divRef = React.useRef<HTMLDivElement>(null);
@@ -35,13 +32,13 @@ export const InverterSelect: React.FC<PropType> = ({
 
   return (
     <>
-      <h2>Инверторная технология</h2>
+      <h2>Рейтинг</h2>
       <div
         ref={divRef}
         onClick={() => setOpen(!open)}
         className="input-selection"
       >
-        <span>{inverter}</span>
+        <span>{rating}</span>
         <svg
           width="13"
           height="13"
@@ -61,10 +58,10 @@ export const InverterSelect: React.FC<PropType> = ({
               : "input-selection-list"
           }
         >
-          {inverterNames.map((x) => (
+          {ratingNames.map((x) => (
             <li
               key={x}
-              onClick={() => setInverter(x)}
+              onClick={() => setRating(x)}
               className="input-selection-item"
             >
               {x}

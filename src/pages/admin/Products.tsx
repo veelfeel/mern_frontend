@@ -1,10 +1,10 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Search } from '../Search';
-import { ProductList } from './ProductList';
-import { Pagination } from '../Pagination';
-import { useAppSelector } from '../../redux/store';
-import { selectProducts } from '../../redux/product/selectors';
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Search } from "../../components/Search";
+import { ProductList } from "../../components/admin/ProductList";
+import { Pagination } from "../../components/Pagination";
+import { useAppSelector } from "../../redux/store";
+import { selectProducts } from "../../redux/product/selectors";
 
 const Products: React.FC = () => {
   const location = useLocation();
@@ -21,7 +21,9 @@ const Products: React.FC = () => {
           <div>Добавить товар</div>
         </Link>
       </div>
-      {location.pathname === '/admin/products' && <Search placeholder={'Поиск товара...'} />}
+      {location.pathname === "/admin/products" && (
+        <Search placeholder={"Поиск товара..."} />
+      )}
       <ProductList />
       {totalPages > 1 && <Pagination />}
     </div>

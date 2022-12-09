@@ -1,11 +1,16 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-import { useAppDispatch } from '../../redux/store';
-import { fetchRemoveProduct } from '../../redux/product/asyncThunk';
-import { Product } from '../../redux/product/types';
+import { useAppDispatch } from "../../redux/store";
+import { fetchRemoveProduct } from "../../redux/product/asyncThunk";
+import { Product } from "../../redux/product/types";
 
-export const ProductBlock: React.FC<Product> = ({ _id, title, price, imageUrl }) => {
+export const ProductBlock: React.FC<Product> = ({
+  _id,
+  title,
+  price,
+  imageUrl,
+}) => {
   const dispatch = useAppDispatch();
 
   const onClickRemove = () => {
@@ -27,10 +32,16 @@ export const ProductBlock: React.FC<Product> = ({ _id, title, price, imageUrl })
       </td>
       <td className="admin-product-block__price">{price.toLocaleString()} ₽</td>
       <td className="admin-product-block__actions">
-        <button onClick={onClickRemove} className="admin-product-block__button-delete text-primary">
+        <Link
+          to={`/admin/products/edit/${_id}`}
+          className="admin-product-block__button-delete text-primary"
+        >
           Редактировать
-        </button>
-        <button onClick={onClickRemove} className="admin-product-block__button-delete text-primary">
+        </Link>
+        <button
+          onClick={onClickRemove}
+          className="admin-product-block__button-delete text-primary"
+        >
           Удалить
         </button>
       </td>

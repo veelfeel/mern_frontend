@@ -1,23 +1,33 @@
 import React from "react";
-
-const inverterNames = ["есть", "нет"];
+import axios from "../../axios";
 
 type PopupClick = MouseEvent & {
   path: Node[];
 };
 
 type PropType = {
-  setInverter: React.Dispatch<React.SetStateAction<string>>;
-  inverter: string;
+  setArea: React.Dispatch<React.SetStateAction<string>>;
+  area: string;
 };
 
-export const InverterSelect: React.FC<PropType> = ({
-  setInverter,
-  inverter,
-}) => {
+export const AreaSelect: React.FC<PropType> = ({ setArea, area }) => {
+  const [areaArray, setAreaArray] = React.useState([]);
   const [open, setOpen] = React.useState(false);
 
   const divRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    async function getAreas() {
+      try {
+        const { data } = await axios.get("/api/areas");
+        setAreaArray(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    getAreas();
+  }, []);
 
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -35,13 +45,13 @@ export const InverterSelect: React.FC<PropType> = ({
 
   return (
     <>
-      <h2>Инверторная технология</h2>
+      <h2>Площадь помещения</h2>
       <div
         ref={divRef}
         onClick={() => setOpen(!open)}
         className="input-selection"
       >
-        <span>{inverter}</span>
+        <span>{area}</span>
         <svg
           width="13"
           height="13"
@@ -61,10 +71,10 @@ export const InverterSelect: React.FC<PropType> = ({
               : "input-selection-list"
           }
         >
-          {inverterNames.map((x) => (
+          {areaArray.map((x) => (
             <li
               key={x}
-              onClick={() => setInverter(x)}
+              onClick={() => setArea(x)}
               className="input-selection-item"
             >
               {x}
