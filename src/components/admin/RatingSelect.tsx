@@ -7,7 +7,7 @@ type PopupClick = MouseEvent & {
 };
 
 type PropType = {
-  setRating: React.Dispatch<React.SetStateAction<string>>;
+  setRating: (value: string) => void;
   rating: string;
 };
 

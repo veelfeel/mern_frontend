@@ -7,7 +7,7 @@ type PopupClick = MouseEvent & {
 };
 
 type PropType = {
-  setInverter: React.Dispatch<React.SetStateAction<string>>;
+  setInverter: (value: string) => void;
   inverter: string;
 };
 

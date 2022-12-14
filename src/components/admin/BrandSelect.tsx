@@ -6,7 +6,7 @@ type PopupClick = MouseEvent & {
 };
 
 type PropType = {
-  setBrand: React.Dispatch<React.SetStateAction<string>>;
+  setBrand: (value: string) => void;
   brand: string;
 };
 

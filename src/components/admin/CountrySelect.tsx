@@ -6,7 +6,7 @@ type PopupClick = MouseEvent & {
 };
 
 type PropType = {
-  setCountry: React.Dispatch<React.SetStateAction<string>>;
+  setCountry: (value: string) => void;
   country: string;
 };
 
