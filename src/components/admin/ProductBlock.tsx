@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { useAppDispatch } from "../../redux/store";
-import { fetchRemoveProduct } from "../../redux/product/asyncThunk";
+import { removeProduct } from "../../redux/product/asyncThunk";
 import { Product } from "../../redux/product/types";
 
 export const ProductBlock: React.FC<Product> = ({
@@ -14,7 +14,7 @@ export const ProductBlock: React.FC<Product> = ({
   const dispatch = useAppDispatch();
 
   const onClickRemove = () => {
-    dispatch(fetchRemoveProduct(_id));
+    dispatch(removeProduct(_id));
   };
 
   return (
@@ -23,12 +23,14 @@ export const ProductBlock: React.FC<Product> = ({
         <div className="admin-product-block__id">{_id}</div>
       </td>
       <td>
-        <img className="admin-product-block__img" src={imageUrl} alt={title} />
+        <img
+          className="admin-product-block__img"
+          src={`http://localhost:5000${imageUrl}`}
+          alt={title}
+        />
       </td>
       <td>
-        <Link to={`/product/${_id}`}>
-          <div className="admin-product-block__title">{title}</div>
-        </Link>
+        <div className="admin-product-block__title">{title}</div>
       </td>
       <td className="admin-product-block__price">{price.toLocaleString()} ₽</td>
       <td className="admin-product-block__actions">

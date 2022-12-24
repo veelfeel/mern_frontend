@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchProducts, fetchRemoveProduct } from './asyncThunk';
-import { ProductSliceState, Status } from './types';
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchProducts, removeProduct } from "./asyncThunk";
+import { ProductSliceState, Status } from "./types";
 
 const initialState: ProductSliceState = {
   total: 0,
@@ -14,7 +14,7 @@ const initialState: ProductSliceState = {
 };
 
 const productsSlice = createSlice({
-  name: 'products',
+  name: "products",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -49,7 +49,7 @@ const productsSlice = createSlice({
       state.products = [];
     });
 
-    builder.addCase(fetchRemoveProduct.pending, (state, action) => {
+    builder.addCase(removeProduct.pending, (state, action) => {
       state.products = state.products.filter((x) => x._id !== action.meta.arg);
     });
   },

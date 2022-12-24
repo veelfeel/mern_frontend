@@ -1,7 +1,7 @@
 export enum SortEnum {
-  RATING_DESC = '-rating',
-  PRICE_ASC = 'price',
-  PRICE_DESC = '-price',
+  RATING_DESC = "-rating",
+  PRICE_ASC = "price",
+  PRICE_DESC = "-price",
 }
 
 export type Sort = {

@@ -1,16 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import { useAppSelector } from '../../redux/store';
-import { selectProducts } from '../../redux/product/selectors';
-import { Product } from '../../redux/product/types';
+import { useAppSelector } from "../../redux/store";
+import { selectProducts } from "../../redux/product/selectors";
+import { Product } from "../../redux/product/types";
 
-import { Loader } from '../Loader';
-import { ErrorLoading } from './ErrorLoading';
-import { ProductBlock } from './ProductBlock';
+import { Loader } from "../Loader";
+import { ErrorLoading } from "./ErrorLoading";
+import { ProductBlock } from "./ProductBlock";
 
 export const ProductList: React.FC = () => {
   const { products, status, total } = useAppSelector(selectProducts);
-  const productBlocks = products.map((obj: Product) => <ProductBlock key={obj._id} {...obj} />);
 
   return (
     <>
@@ -25,18 +24,22 @@ export const ProductList: React.FC = () => {
           </tr>
         </thead>
       </table>
-      {status === 'loading' ? (
-        <Loader className={'admin-product-block'} />
-      ) : status === 'error' ? (
+      {status === "loading" ? (
+        <Loader className={"admin-product-block"} />
+      ) : status === "error" ? (
         <ErrorLoading />
-      ) : total === 0 ?
-      (<div className="product-not-found">
-                  <h2>Товары не найдены 😕</h2>
-                  <p>Попробуйте изменить параметры поиска</p>
-                </div>)
-      : (
+      ) : total === 0 ? (
+        <div className="product-not-found">
+          <h2>Товары не найдены 😕</h2>
+          <p>Попробуйте изменить параметры поиска</p>
+        </div>
+      ) : (
         <table>
-          <tbody>{productBlocks}</tbody>
+          <tbody>
+            {products.map((obj: Product) => (
+              <ProductBlock key={obj._id} {...obj} />
+            ))}
+          </tbody>
         </table>
       )}
     </>

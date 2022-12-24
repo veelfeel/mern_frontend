@@ -33,11 +33,11 @@ export const fetchProducts = createAsyncThunk<
   }
 });
 
-export const fetchRemoveProduct = createAsyncThunk<
+export const removeProduct = createAsyncThunk<
   object,
   string,
   { rejectValue: string }
->("products/fetchRemoveProduct", async (id, { rejectWithValue }) => {
+>("products/removeProduct", async (id, { rejectWithValue }) => {
   try {
     const { data } = await axios.delete(`/api/products/${id}`);
     return data as object;

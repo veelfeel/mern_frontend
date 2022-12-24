@@ -1,8 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import { useAppSelector } from '../redux/store';
-import { selectProducts } from '../redux/product/selectors';
-import { Product } from '../redux/product/types';
+import { useAppDispatch, useAppSelector } from "../redux/store";
+import { selectProducts } from "../redux/product/selectors";
+import { selectFilters } from "../redux/filters/selectors";
+import { fetchProducts } from "../redux/product/asyncThunk";
+
+import { Product } from "../redux/product/types";
 
 import {
   ContactOfPromo,
@@ -13,13 +16,67 @@ import {
   Loader,
   ProductBlock,
   Sidebar,
-} from '../components';
+} from "../components";
 
 const Home: React.FC = () => {
   const { products, status, total, limit } = useAppSelector(selectProducts);
   const totalPages = Math.ceil(total / limit);
 
-  const productBlocks = products.map((obj: Product) => <ProductBlock key={obj._id} {...obj} />);
+  const dispatch = useAppDispatch();
+  const {
+    searchValue,
+    inverterFilter,
+    minPriceFilter,
+    maxPriceFilter,
+    areaFilter,
+    brandFilter,
+    countryFilter,
+    sort,
+    page,
+  } = useAppSelector(selectFilters);
+
+  const getProducts = async () => {
+    const search = searchValue ? `&search=${searchValue}` : "";
+    const inverter =
+      inverterFilter.length > 0 ? `&inverter=${inverterFilter.toString()}` : "";
+    const minPrice = minPriceFilter ? `&minPrice=${minPriceFilter}` : "";
+    const maxPrice = maxPriceFilter ? `&maxPrice=${maxPriceFilter}` : "";
+    const area = areaFilter.length > 0 ? `&area=${areaFilter.toString()}` : "";
+    const brand =
+      brandFilter.length > 0 ? `&brand=${brandFilter.toString()}` : "";
+    const country = `&country=${countryFilter}`;
+    const sortBy = sort.sortProperty.replace("-", "");
+    const order = sort.sortProperty.includes("-") ? "-1" : "1";
+
+    dispatch(
+      fetchProducts({
+        page,
+        search,
+        inverter,
+        minPrice,
+        maxPrice,
+        area,
+        brand,
+        country,
+        sortBy,
+        order,
+      })
+    );
+  };
+
+  React.useEffect(() => {
+    getProducts();
+  }, [
+    page,
+    searchValue,
+    inverterFilter,
+    minPriceFilter,
+    maxPriceFilter,
+    areaFilter,
+    brandFilter,
+    countryFilter,
+    sort.sortProperty,
+  ]);
 
   return (
     <>
@@ -33,7 +90,7 @@ const Home: React.FC = () => {
         </div>
       </div>
       <div className="container padding-bottom">
-        {status === 'loading' ? (
+        {status === "loading" ? (
           <div className="page__title skeleton"></div>
         ) : (
           <div className="page__title">
@@ -46,22 +103,25 @@ const Home: React.FC = () => {
           <div className="right-bar">
             <Sort />
             <div className="products-container">
-              {status === 'error' ? (
+              {status === "error" ? (
                 <div>
                   <h2>Произошла ошибка 😕</h2>
                   <p>
-                    К сожалению, не удалось загрузить товары. Попробуйте повторить попытку позже.
+                    К сожалению, не удалось загрузить товары. Попробуйте
+                    повторить попытку позже.
                   </p>
                 </div>
-              ) : status === 'loading' ? (
-                <Loader className={'product-block'} />
+              ) : status === "loading" ? (
+                <Loader className={"product-block"} />
               ) : total === 0 ? (
                 <div className="product-not-found">
                   <h2>Товары не найдены 😕</h2>
                   <p>Попробуйте изменить параметры фильрации или поиска.</p>
                 </div>
               ) : (
-                productBlocks
+                products.map((obj: Product) => (
+                  <ProductBlock key={obj._id} {...obj} />
+                ))
               )}
             </div>
             {totalPages > 1 && <Pagination />}

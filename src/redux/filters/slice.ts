@@ -1,23 +1,23 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { FilterSliceState, Sort, SortEnum } from './types';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { FilterSliceState, Sort, SortEnum } from "./types";
 
 const initialState: FilterSliceState = {
-  searchValue: '',
+  searchValue: "",
   inverterFilter: [],
-  minPriceFilter: '',
-  maxPriceFilter: '',
+  minPriceFilter: "",
+  maxPriceFilter: "",
   areaFilter: [],
   brandFilter: [],
-  countryFilter: 'Все страны',
+  countryFilter: "Все страны",
   sort: {
-    name: 'По популярности',
+    name: "По популярности",
     sortProperty: SortEnum.RATING_DESC,
   },
   page: 1,
 };
 
 const filterSlice = createSlice({
-  name: 'filters',
+  name: "filters",
   initialState,
   reducers: {
     setSearchValue(state, action: PayloadAction<string>) {
@@ -27,7 +27,9 @@ const filterSlice = createSlice({
       state.inverterFilter = [...state.inverterFilter, action.payload];
     },
     setInverterFilterUnchecked(state, action: PayloadAction<string>) {
-      state.inverterFilter = state.inverterFilter.filter((str) => str !== action.payload);
+      state.inverterFilter = state.inverterFilter.filter(
+        (str) => str !== action.payload
+      );
     },
     setMinPriceFilter(state, action: PayloadAction<string>) {
       state.minPriceFilter = action.payload;
@@ -39,13 +41,17 @@ const filterSlice = createSlice({
       state.areaFilter = [...state.areaFilter, action.payload];
     },
     setAreaFilterUnchecked(state, action: PayloadAction<string>) {
-      state.areaFilter = state.areaFilter.filter((str) => str !== action.payload);
+      state.areaFilter = state.areaFilter.filter(
+        (str) => str !== action.payload
+      );
     },
     setBrandFilterChecked(state, action: PayloadAction<string>) {
       state.brandFilter = [...state.brandFilter, action.payload];
     },
     setBrandFilterUnchecked(state, action: PayloadAction<string>) {
-      state.brandFilter = state.brandFilter.filter((str) => str !== action.payload);
+      state.brandFilter = state.brandFilter.filter(
+        (str) => str !== action.payload
+      );
     },
     setCountryFilter(state, action: PayloadAction<string>) {
       state.countryFilter = action.payload;

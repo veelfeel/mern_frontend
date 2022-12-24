@@ -20,10 +20,26 @@ const AddProduct: React.FC = () => {
   const [brand, setBrand] = React.useState("Toshiba");
   const [country, setCountry] = React.useState("Китай");
   const [price, setPrice] = React.useState("");
-  const [imageUrl, setImageUrl] = React.useState(
-    "https://via.placeholder.com/600/d32776"
-  );
   const [rating, setRating] = React.useState("7");
+  const [imageUrl, setImageUrl] = React.useState("");
+  const inputFileRef = React.useRef<HTMLInputElement>(null);
+
+  const handleChangeFile = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    try {
+      if (!event.target.files) return;
+
+      const file = event.target.files[0];
+      const formData = new FormData();
+      formData.append("image", file);
+      const { data } = await axios.post("/upload", formData);
+      setImageUrl(data.url);
+    } catch (error) {
+      console.log(error);
+      alert("Ошибка при загрузке файла");
+    }
+  };
 
   const addProduct = async () => {
     try {
@@ -78,8 +94,6 @@ const AddProduct: React.FC = () => {
     }
   }, []);
 
-  console.log(title);
-
   return (
     <div className="admin-add-product">
       <div className="admin-add-product__header">
@@ -126,7 +140,18 @@ const AddProduct: React.FC = () => {
         type="text"
       />
       <h2>Изображения</h2>
-      <input type="file" />
+      <button
+        onClick={() => inputFileRef.current?.click()}
+        className="admin-button"
+      >
+        Загрузить изображение
+      </button>
+      <input
+        ref={inputFileRef}
+        onChange={handleChangeFile}
+        type="file"
+        hidden
+      />
       <RatingSelect setRating={setRating} rating={rating} />
       <button onClick={addProduct} className="admin-button">
         {isEditing ? "Сохранить" : "Создать товар"}

@@ -2,11 +2,8 @@ import React, { Suspense } from "react";
 import Loadable from "react-loadable";
 import { Routes, Route } from "react-router-dom";
 
-import { useAppDispatch, useAppSelector } from "./redux/store";
-import { selectIsAuth } from "./redux/auth/selectors";
+import { useAppDispatch } from "./redux/store";
 import { fetchAuthMe } from "./redux/auth/asyncThunk";
-import { selectFilters } from "./redux/filters/selectors";
-import { fetchProducts } from "./redux/product/asyncThunk";
 
 import "./app.scss";
 
@@ -41,61 +38,6 @@ const NotFound = React.lazy(
 
 function App() {
   const dispatch = useAppDispatch();
-  const {
-    searchValue,
-    inverterFilter,
-    minPriceFilter,
-    maxPriceFilter,
-    areaFilter,
-    brandFilter,
-    countryFilter,
-    sort,
-    page,
-  } = useAppSelector(selectFilters);
-  const isAuth = useAppSelector(selectIsAuth);
-
-  const getProducts = async () => {
-    const search = searchValue ? `&search=${searchValue}` : "";
-    const inverter =
-      inverterFilter.length > 0 ? `&inverter=${inverterFilter.toString()}` : "";
-    const minPrice = minPriceFilter ? `&minPrice=${minPriceFilter}` : "";
-    const maxPrice = maxPriceFilter ? `&maxPrice=${maxPriceFilter}` : "";
-    const area = areaFilter.length > 0 ? `&area=${areaFilter.toString()}` : "";
-    const brand =
-      brandFilter.length > 0 ? `&brand=${brandFilter.toString()}` : "";
-    const country = `&country=${countryFilter}`;
-    const sortBy = sort.sortProperty.replace("-", "");
-    const order = sort.sortProperty.includes("-") ? "-1" : "1";
-
-    dispatch(
-      fetchProducts({
-        page,
-        search,
-        inverter,
-        minPrice,
-        maxPrice,
-        area,
-        brand,
-        country,
-        sortBy,
-        order,
-      })
-    );
-  };
-
-  React.useEffect(() => {
-    getProducts();
-  }, [
-    page,
-    searchValue,
-    inverterFilter,
-    minPriceFilter,
-    maxPriceFilter,
-    areaFilter,
-    brandFilter,
-    countryFilter,
-    sort.sortProperty,
-  ]);
 
   React.useEffect(() => {
     dispatch(fetchAuthMe());

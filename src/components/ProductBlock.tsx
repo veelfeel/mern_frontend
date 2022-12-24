@@ -1,11 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-import { CardRating } from './CardRating';
-import { AddFavouritesButton } from './AddFavouritesButton';
-import { useAppDispatch } from '../redux/store';
-import { CartItem } from '../redux/cart/types';
-import { addCartItem } from '../redux/cart/slice';
+import { CardRating } from "./CardRating";
+import { AddFavouritesButton } from "./AddFavouritesButton";
+import { useAppDispatch } from "../redux/store";
+import { CartItem } from "../redux/cart/types";
+import { addCartItem } from "../redux/cart/slice";
 
 export type ProductBlockProps = {
   _id: string;
@@ -52,7 +52,11 @@ export const ProductBlock: React.FC<ProductBlockProps> = ({
   return (
     <div className="product-block">
       <div className="product-block__inner-img">
-        <img className="product-block__img" src={imageUrl} alt={title} />
+        <img
+          className="product-block__img"
+          src={`http://localhost:5000${imageUrl}`}
+          alt={title}
+        />
       </div>
       <Link to={`/product/${_id}`}>
         <h4 className="product-block__title text-primary">{title}</h4>
@@ -103,10 +107,15 @@ export const ProductBlock: React.FC<ProductBlockProps> = ({
           <span>₽</span>
         </div>
         <AddFavouritesButton />
-        <button onClick={onClickAdd} className="product-block-button button-primary">
+        <button
+          onClick={onClickAdd}
+          className="product-block-button button-primary"
+        >
           + Добавить
         </button>
-        <span className="product-block__count-in-stock">В наличии: {countInStock} шт.</span>
+        <span className="product-block__count-in-stock">
+          В наличии: {countInStock} шт.
+        </span>
         <span className="product-block__delivery"> Бесплатная доставка</span>
       </div>
     </div>

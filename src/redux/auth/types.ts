@@ -16,9 +16,9 @@ export type Auth = {
 };
 
 export enum Status {
-  LOADING = 'loading',
-  LOADED = 'loaded',
-  ERROR = 'error',
+  LOADING = "loading",
+  LOADED = "loaded",
+  ERROR = "error",
 }
 
 export interface AuthState {
