@@ -13,7 +13,7 @@ const initialState: FilterSliceState = {
     name: "По популярности",
     sortProperty: SortEnum.RATING_DESC,
   },
-  page: 1,
+  pageValue: 1,
 };
 
 const filterSlice = createSlice({
@@ -60,7 +60,7 @@ const filterSlice = createSlice({
       state.sort = action.payload;
     },
     setCurrentPage(state, action: PayloadAction<number>) {
-      state.page = action.payload;
+      state.pageValue = action.payload;
     },
   },
 });

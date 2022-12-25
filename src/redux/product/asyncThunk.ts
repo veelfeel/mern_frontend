@@ -1,5 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { FilterProductParams } from "../filters/types";
+import {
+  FilterProductParams,
+  FilterProductParamsAdmin,
+} from "../filters/types";
 import { ProductData } from "./types";
 import axios from "../../axios";
 
@@ -25,7 +28,6 @@ export const fetchProducts = createAsyncThunk<
     const { data } = await axios.get(
       `/api/products?page=${page}${search}${inverter}${minPrice}${maxPrice}${area}${brand}${country}&sortBy=${sortBy}&order=${order}`
     );
-    // console.log(data);
     return data as ProductData;
   } catch (error) {
     console.log(error);
@@ -44,5 +46,21 @@ export const removeProduct = createAsyncThunk<
   } catch (error) {
     console.log(error);
     return rejectWithValue("Не удалось удалить продукт");
+  }
+});
+
+export const fetchProductsAdmin = createAsyncThunk<
+  ProductData,
+  FilterProductParamsAdmin,
+  { rejectValue: string }
+>("products/fetchProductsAdmin", async (params, { rejectWithValue }) => {
+  try {
+    const { page, search } = params;
+
+    const { data } = await axios.get(`/api/products${page}${search}`);
+    return data as ProductData;
+  } catch (error) {
+    console.log(error);
+    return rejectWithValue("Не удалось получить продукты");
   }
 });

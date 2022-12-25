@@ -1,9 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { useAppDispatch } from "../../redux/store";
-import { removeProduct } from "../../redux/product/asyncThunk";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import {
+  fetchProductsAdmin,
+  removeProduct,
+} from "../../redux/product/asyncThunk";
 import { Product } from "../../redux/product/types";
+import { selectFilters } from "../../redux/filters/selectors";
 
 export const ProductBlock: React.FC<Product> = ({
   _id,
@@ -12,9 +16,20 @@ export const ProductBlock: React.FC<Product> = ({
   imageUrl,
 }) => {
   const dispatch = useAppDispatch();
+  const { searchValue, pageValue } = useAppSelector(selectFilters);
 
-  const onClickRemove = () => {
+  const onClickRemove = async () => {
     dispatch(removeProduct(_id));
+
+    const page = pageValue ? `?page=${pageValue}` : "";
+    const search = searchValue ? `&search=${searchValue}` : "";
+
+    dispatch(
+      fetchProductsAdmin({
+        page,
+        search,
+      })
+    );
   };
 
   return (

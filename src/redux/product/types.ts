@@ -14,9 +14,9 @@ export type Product = {
 };
 
 export enum Status {
-  LOADING = 'loading',
-  SUCCESS = 'success',
-  ERROR = 'error',
+  LOADING = "loading",
+  SUCCESS = "success",
+  ERROR = "error",
 }
 
 export interface ProductSliceState {
@@ -39,3 +39,14 @@ export interface ProductData {
   countries: string[];
   products: Product[];
 }
+
+// export interface CreateProdFields {
+//   title: string;
+//   inverter: string;
+//   area: string;
+//   brand: string;
+//   country: string;
+//   price: number;
+//   imageUrl: string;
+//   rating: string;
+// }

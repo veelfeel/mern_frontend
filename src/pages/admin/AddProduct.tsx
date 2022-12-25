@@ -9,11 +9,6 @@ import { CountrySelect } from "../../components/admin/CountrySelect";
 import { RatingSelect } from "../../components/admin/RatingSelect";
 
 const AddProduct: React.FC = () => {
-  const { id } = useParams();
-  const isEditing = Boolean(id);
-
-  const navigate = useNavigate();
-
   const [title, setTitle] = React.useState("");
   const [inverter, setInverter] = React.useState("есть");
   const [area, setArea] = React.useState("25 м² - 30 м²");
@@ -23,6 +18,11 @@ const AddProduct: React.FC = () => {
   const [rating, setRating] = React.useState("7");
   const [imageUrl, setImageUrl] = React.useState("");
   const inputFileRef = React.useRef<HTMLInputElement>(null);
+
+  const { id } = useParams();
+  const isEditing = Boolean(id);
+
+  const navigate = useNavigate();
 
   const handleChangeFile = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -41,7 +41,7 @@ const AddProduct: React.FC = () => {
     }
   };
 
-  const addProduct = async () => {
+  const addProductHandler = async () => {
     try {
       if (Boolean(title) && Boolean(price)) {
         const fields = {
@@ -57,10 +57,8 @@ const AddProduct: React.FC = () => {
 
         if (isEditing) {
           await axios.patch(`/api/products/${id}`, fields);
-          console.log("update success");
         } else {
           await axios.post("/api/products", fields);
-          console.log("create success");
         }
 
         navigate("/admin/products");
@@ -153,7 +151,13 @@ const AddProduct: React.FC = () => {
         hidden
       />
       <RatingSelect setRating={setRating} rating={rating} />
-      <button onClick={addProduct} className="admin-button">
+      <button
+        disabled={
+          [title, price, imageUrl].every((field) => Boolean(field)) === false
+        }
+        onClick={addProductHandler}
+        className="admin-button"
+      >
         {isEditing ? "Сохранить" : "Создать товар"}
       </button>
     </div>

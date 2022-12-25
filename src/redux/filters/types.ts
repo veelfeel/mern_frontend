@@ -18,7 +18,7 @@ export interface FilterSliceState {
   brandFilter: string[];
   countryFilter: string;
   sort: Sort;
-  page: number;
+  pageValue: number;
 }
 
 export type FilterProductParams = {
@@ -32,4 +32,9 @@ export type FilterProductParams = {
   sortBy: string;
   order: string;
   page: number;
+};
+
+export type FilterProductParamsAdmin = {
+  search: string;
+  page: string;
 };

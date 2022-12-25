@@ -1,12 +1,12 @@
-import React from 'react';
-import { useAppDispatch, useAppSelector } from '../redux/store';
-import { setCurrentPage } from '../redux/filters/slice';
-import { selectProducts } from '../redux/product/selectors';
+import React from "react";
+import { useAppDispatch, useAppSelector } from "../redux/store";
+import { setCurrentPage } from "../redux/filters/slice";
+import { selectProducts } from "../redux/product/selectors";
 
 export const Pagination = () => {
   const dispatch = useAppDispatch();
   const { total, limit } = useAppSelector(selectProducts);
-  const page = useAppSelector((state) => state.filters.page);
+  const page = useAppSelector((state) => state.filters.pageValue);
 
   const totalPages = Math.ceil(total / limit);
 
@@ -26,9 +26,10 @@ export const Pagination = () => {
             onClick={() => onClick(index)}
             className={
               page === index + 1
-                ? 'pagination-button pagination-button--active'
-                : 'pagination-button'
-            }>
+                ? "pagination-button pagination-button--active"
+                : "pagination-button"
+            }
+          >
             {index + 1}
           </button>
         ))}

@@ -23,6 +23,7 @@ const Home: React.FC = () => {
   const totalPages = Math.ceil(total / limit);
 
   const dispatch = useAppDispatch();
+
   const {
     searchValue,
     inverterFilter,

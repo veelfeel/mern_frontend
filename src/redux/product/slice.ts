@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchProducts, removeProduct } from "./asyncThunk";
+import { fetchProducts, fetchProductsAdmin, removeProduct } from "./asyncThunk";
 import { ProductSliceState, Status } from "./types";
 
 const initialState: ProductSliceState = {
@@ -51,6 +51,25 @@ const productsSlice = createSlice({
 
     builder.addCase(removeProduct.pending, (state, action) => {
       state.products = state.products.filter((x) => x._id !== action.meta.arg);
+    });
+
+    builder.addCase(fetchProductsAdmin.pending, (state) => {
+      state.status = Status.LOADING;
+      state.total = 0;
+      state.limit = 0;
+      state.products = [];
+    });
+    builder.addCase(fetchProductsAdmin.fulfilled, (state, action) => {
+      state.status = Status.SUCCESS;
+      state.total = action.payload.total;
+      state.limit = action.payload.limit;
+      state.products = action.payload.products;
+    });
+    builder.addCase(fetchProductsAdmin.rejected, (state) => {
+      state.status = Status.ERROR;
+      state.total = 0;
+      state.limit = 0;
+      state.products = [];
     });
   },
 });

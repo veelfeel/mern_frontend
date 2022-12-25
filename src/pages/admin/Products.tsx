@@ -5,70 +5,33 @@ import { ProductList } from "../../components/admin/ProductList";
 import { Pagination } from "../../components/Pagination";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { selectProducts } from "../../redux/product/selectors";
-import { fetchProducts } from "../../redux/product/asyncThunk";
+import { fetchProductsAdmin } from "../../redux/product/asyncThunk";
 import { selectFilters } from "../../redux/filters/selectors";
 
 const Products: React.FC = () => {
-  const { total, limit } = useAppSelector(selectProducts);
+  const { total, limit, status } = useAppSelector(selectProducts);
   const totalPages = Math.ceil(total / limit);
 
   const location = useLocation();
 
   const dispatch = useAppDispatch();
-  const {
-    searchValue,
-    inverterFilter,
-    minPriceFilter,
-    maxPriceFilter,
-    areaFilter,
-    brandFilter,
-    countryFilter,
-    sort,
-    page,
-  } = useAppSelector(selectFilters);
+  const { searchValue, pageValue } = useAppSelector(selectFilters);
 
   const getProducts = async () => {
+    const page = pageValue ? `?page=${pageValue}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";
-    const inverter =
-      inverterFilter.length > 0 ? `&inverter=${inverterFilter.toString()}` : "";
-    const minPrice = minPriceFilter ? `&minPrice=${minPriceFilter}` : "";
-    const maxPrice = maxPriceFilter ? `&maxPrice=${maxPriceFilter}` : "";
-    const area = areaFilter.length > 0 ? `&area=${areaFilter.toString()}` : "";
-    const brand =
-      brandFilter.length > 0 ? `&brand=${brandFilter.toString()}` : "";
-    const country = `&country=${countryFilter}`;
-    const sortBy = sort.sortProperty.replace("-", "");
-    const order = sort.sortProperty.includes("-") ? "-1" : "1";
 
     dispatch(
-      fetchProducts({
+      fetchProductsAdmin({
         page,
         search,
-        inverter,
-        minPrice,
-        maxPrice,
-        area,
-        brand,
-        country,
-        sortBy,
-        order,
       })
     );
   };
 
   React.useEffect(() => {
     getProducts();
-  }, [
-    page,
-    searchValue,
-    inverterFilter,
-    minPriceFilter,
-    maxPriceFilter,
-    areaFilter,
-    brandFilter,
-    countryFilter,
-    sort.sortProperty,
-  ]);
+  }, [pageValue, searchValue]);
 
   return (
     <div className="admin-products">
